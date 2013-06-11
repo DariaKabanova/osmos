@@ -12,12 +12,17 @@
 #include <GL/glut.h>
 #endif
 
+void keyDown(int key) {
+    
+}
+
+// Функция рисования окна
 void display()
 {
     /* clear the color buffer (resets everything to black) */
     glClear(GL_COLOR_BUFFER_BIT);
     
-    /* set the current drawing color to red */
+    // Установка текущего цвета
     glColor3f(1, 0, 0);
     
     /* start drawing triangles, each triangle takes 3 vertices */
@@ -31,66 +36,58 @@ void display()
     /* tell OpenGL we're done drawing triangles */
     glEnd();
     
-    /* swap the back and front buffers so we can see what we just drew */
+    // Использование обмена буферов. Используется окно с двойной буферизацией.
     glutSwapBuffers();
 }
 
+// Функция перерисовки при изменении размеров окна
 void reshape(int width, int height)
 {
-    /* tell OpenGL we want to display in a recangle that is the
-     same size as the window
-     */
+    // Перестройка вывода
+     
     glViewport(0,0,width,height);
     
-    /* switch to the projection matrix */
+    // switch to the projection matrix
     glMatrixMode(GL_PROJECTION);
     
-    /* clear the projection matrix */
+    // clear the projection matrix
     glLoadIdentity();
     
-    /* set the camera view, orthographic projection in 2D */
+    // set the camera view, orthographic projection in 2D 
     gluOrtho2D(0,width,0,height);
     
-    /* switch back to the model view matrix */
+    // switch back to the model view matrix 
     glMatrixMode(GL_MODELVIEW);
 }
 
 
 int main(int argc, char** argv)
 {
+    // Инициализация переменных состояния GLUT и открытие сессии с системой управления окнами
     glutInit(&argc, argv);
     
-    /* set the window size to 512 x 512 */
+    // Установка начального состояния окна
     glutInitWindowSize(512, 512);
-    
-    /* set the display mode to Red, Green, Blue and Alpha
-     allocate a depth buffer
-     enable double buffering
-     */
+     
+    // Установка режима состояния экрана RGBA
     glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
     
-    /* create the window (and call it Lab 1) */
     glutCreateWindow("Osmos");
     
-    /* set the glut display callback function
-     this is the function GLUT will call every time
-     the window needs to be drawn
-     */
+    // Установка функции рисования для текущего окна
     glutDisplayFunc(display);
     
-    /* set the glut reshape callback function
-     this is the function GLUT will call whenever
-     the window is resized, including when it is
-     first created
-     */
+    glutKeyboardFunc(keyDown);
+    
+    // Установка функции обработки пустого события - glutIdleFunc(...) - необходимо для анимации
+    
+    // Установка функции изменения размеров окна
     glutReshapeFunc(reshape);
     
-    /* set the default background color to black */
-    glClearColor(0,0,0,1);
+    // Установка цвета фона
+    glClearColor(0,1,1,0.3);
     
-    /* enter the main event loop so that GLUT can process
-     all of the window event messages
-     */
+    // Запуск механизма обработки событий
     glutMainLoop();
     
     return 0;
