@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2F4ABA62176764A500EC6CB0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2F4ABA61176764A500EC6CB0 /* main.cpp */; };
 		2F4ABA64176764A500EC6CB0 /* Osmos.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2F4ABA63176764A500EC6CB0 /* Osmos.1 */; };
+		2F4ABA6B17677FEE00EC6CB0 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F4ABA6A17677FEE00EC6CB0 /* GLUT.framework */; };
+		2F4ABA6F17679CDE00EC6CB0 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F4ABA6E17679CDE00EC6CB0 /* OpenGL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +30,8 @@
 		2F4ABA5E176764A500EC6CB0 /* Osmos */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Osmos; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F4ABA61176764A500EC6CB0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		2F4ABA63176764A500EC6CB0 /* Osmos.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Osmos.1; sourceTree = "<group>"; };
+		2F4ABA6A17677FEE00EC6CB0 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		2F4ABA6E17679CDE00EC6CB0 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +39,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F4ABA6F17679CDE00EC6CB0 /* OpenGL.framework in Frameworks */,
+				2F4ABA6B17677FEE00EC6CB0 /* GLUT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +50,8 @@
 		2F4ABA55176764A500EC6CB0 = {
 			isa = PBXGroup;
 			children = (
+				2F4ABA6E17679CDE00EC6CB0 /* OpenGL.framework */,
+				2F4ABA6A17677FEE00EC6CB0 /* GLUT.framework */,
 				2F4ABA60176764A500EC6CB0 /* Osmos */,
 				2F4ABA5F176764A500EC6CB0 /* Products */,
 			);
