@@ -11,6 +11,10 @@
 #else
 #include <GL/glut.h>
 #endif
+#include <OpenGL/OpenGL.h>
+#include "circle.h"
+
+
 
 // Функция нажатия на клавишу key
 void keyDown(unsigned char key, int x, int y) {
@@ -23,18 +27,16 @@ void display()
     // Очистка буфера цвета
     glClear(GL_COLOR_BUFFER_BIT);
     
-    // Установка текущего цвета
-    glColor3f(1, 0, 0);
     
-    // Задание примитива
-    glBegin(GL_TRIANGLES);
     
-    // Установка вершин
-    glVertex2f(10, 10);
-    glVertex2f(250, 400);
-    glVertex2f(400, 10);
+    Circle * circle;
+    circle=new Circle();
     
-    glEnd();
+    circle->Move();
+    
+    circle->Draw();
+    
+    
     
     // Использование обмена буферов. Используется окно с двойной буферизацией.
     glutSwapBuffers();
@@ -78,8 +80,6 @@ int main(int argc, char** argv)
     // Установка параметров экрана и переход в полноэкранный режим
     //glutGameModeString("800x600:32");
     //glutEnterGameMode();
-    
-    
     
     // Установка функции рисования для текущего окна
     glutDisplayFunc(display);
