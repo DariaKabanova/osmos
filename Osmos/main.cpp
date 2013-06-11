@@ -12,28 +12,28 @@
 #include <GL/glut.h>
 #endif
 
-void keyDown(int key) {
+// Функция нажатия на клавишу key
+void keyDown(unsigned char key, int x, int y) {
     
 }
 
 // Функция рисования окна
 void display()
 {
-    /* clear the color buffer (resets everything to black) */
+    // Очистка буфера цвета
     glClear(GL_COLOR_BUFFER_BIT);
     
     // Установка текущего цвета
     glColor3f(1, 0, 0);
     
-    /* start drawing triangles, each triangle takes 3 vertices */
+    // Задание примитива
     glBegin(GL_TRIANGLES);
     
-    /* give the 3 triangle vertex coordinates 1 at a time */
+    // Установка вершин
     glVertex2f(10, 10);
     glVertex2f(250, 400);
     glVertex2f(400, 10);
     
-    /* tell OpenGL we're done drawing triangles */
     glEnd();
     
     // Использование обмена буферов. Используется окно с двойной буферизацией.
@@ -43,21 +43,22 @@ void display()
 // Функция перерисовки при изменении размеров окна
 void reshape(int width, int height)
 {
-    // Перестройка вывода
-     
+    // Перестройка вывода, установка области вывода изображения
     glViewport(0,0,width,height);
     
-    // switch to the projection matrix
+    // Загрузка матрицы проекции
     glMatrixMode(GL_PROJECTION);
     
-    // clear the projection matrix
+    // Замена матрицы проекции единичной
     glLoadIdentity();
     
-    // set the camera view, orthographic projection in 2D 
+    // Установка ортогональной проекции
     gluOrtho2D(0,width,0,height);
     
-    // switch back to the model view matrix 
+    // Загрузка модельно-видовой матрицы
     glMatrixMode(GL_MODELVIEW);
+    
+    glLoadIdentity();
 }
 
 
@@ -70,9 +71,15 @@ int main(int argc, char** argv)
     glutInitWindowSize(512, 512);
      
     // Установка режима состояния экрана RGBA
-    glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
+    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
     
     glutCreateWindow("Osmos");
+    
+    // Установка параметров экрана и переход в полноэкранный режим
+    //glutGameModeString("800x600:32");
+    //glutEnterGameMode();
+    
+    
     
     // Установка функции рисования для текущего окна
     glutDisplayFunc(display);
