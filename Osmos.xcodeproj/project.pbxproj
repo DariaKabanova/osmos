@@ -1,0 +1,221 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2F4ABA62176764A500EC6CB0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2F4ABA61176764A500EC6CB0 /* main.cpp */; };
+		2F4ABA64176764A500EC6CB0 /* Osmos.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2F4ABA63176764A500EC6CB0 /* Osmos.1 */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2F4ABA5C176764A500EC6CB0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				2F4ABA64176764A500EC6CB0 /* Osmos.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		2F4ABA5E176764A500EC6CB0 /* Osmos */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Osmos; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F4ABA61176764A500EC6CB0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		2F4ABA63176764A500EC6CB0 /* Osmos.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Osmos.1; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2F4ABA5B176764A500EC6CB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2F4ABA55176764A500EC6CB0 = {
+			isa = PBXGroup;
+			children = (
+				2F4ABA60176764A500EC6CB0 /* Osmos */,
+				2F4ABA5F176764A500EC6CB0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2F4ABA5F176764A500EC6CB0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2F4ABA5E176764A500EC6CB0 /* Osmos */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2F4ABA60176764A500EC6CB0 /* Osmos */ = {
+			isa = PBXGroup;
+			children = (
+				2F4ABA61176764A500EC6CB0 /* main.cpp */,
+				2F4ABA63176764A500EC6CB0 /* Osmos.1 */,
+			);
+			path = Osmos;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2F4ABA5D176764A500EC6CB0 /* Osmos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F4ABA67176764A500EC6CB0 /* Build configuration list for PBXNativeTarget "Osmos" */;
+			buildPhases = (
+				2F4ABA5A176764A500EC6CB0 /* Sources */,
+				2F4ABA5B176764A500EC6CB0 /* Frameworks */,
+				2F4ABA5C176764A500EC6CB0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Osmos;
+			productName = Osmos;
+			productReference = 2F4ABA5E176764A500EC6CB0 /* Osmos */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2F4ABA56176764A500EC6CB0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Дарья Кабанова";
+			};
+			buildConfigurationList = 2F4ABA59176764A500EC6CB0 /* Build configuration list for PBXProject "Osmos" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2F4ABA55176764A500EC6CB0;
+			productRefGroup = 2F4ABA5F176764A500EC6CB0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2F4ABA5D176764A500EC6CB0 /* Osmos */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2F4ABA5A176764A500EC6CB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F4ABA62176764A500EC6CB0 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2F4ABA65176764A500EC6CB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		2F4ABA66176764A500EC6CB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		2F4ABA68176764A500EC6CB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		2F4ABA69176764A500EC6CB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2F4ABA59176764A500EC6CB0 /* Build configuration list for PBXProject "Osmos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F4ABA65176764A500EC6CB0 /* Debug */,
+				2F4ABA66176764A500EC6CB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F4ABA67176764A500EC6CB0 /* Build configuration list for PBXNativeTarget "Osmos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F4ABA68176764A500EC6CB0 /* Debug */,
+				2F4ABA69176764A500EC6CB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2F4ABA56176764A500EC6CB0 /* Project object */;
+}
