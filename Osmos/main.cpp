@@ -27,12 +27,12 @@ void display()
     // Очистка буфера цвета
     glClear(GL_COLOR_BUFFER_BIT);
     
+    GLfloat color[3]={0.8,0.0,1.0};
     
-    
-    Circle circle;
+    Circle circle (200.0,300.0,50.0,color);
     //circle=new Circle();
     
-    circle.Move();
+    //circle.Move();
     
     circle.Draw();
     
@@ -72,12 +72,12 @@ void idle() {
     
     
     
-    Circle * circle;
+    /*Circle * circle;
     circle=new Circle();
     
     circle->Move();
     
-    circle->Draw();
+    circle->Draw();*/
     
     
     

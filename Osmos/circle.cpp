@@ -7,22 +7,47 @@
 //
 
 #include "circle.h"
+#include "math.h"
 //#include <OpenGL/OpenGL.h>
 #include <GLUT/GLUT.h>
 
 void Circle::Draw() {
+    
     // Установка текущего цвета
-    glColor3f(1, 0, 0);
+    glColor3fv(color);
     
-    // Задание примитива
+    // смещение центра круга
+    glTranslatef(x, y, 0.0);
+    
+    // количество секторов, образующих круг
+    int n=(int)(radius/2);
+    
+    GLfloat dy=0.0;
+    GLfloat dx=radius;
+    GLfloat d=0.0;
+    
+    // Рисование круга
+    
     glBegin(GL_TRIANGLES);
+
+    for (int i=0; i<n; i++) {
     
-    // Установка вершин
-    glVertex2f(10, 10);
-    glVertex2f(250, 400);
-    glVertex2f(400, 10);
-    
+        glVertex2f(0.0, 0.0);
+        glVertex2f(dx, dy);
+        
+        d=sinf(M_PI*2.0/(float)n*(i+1));
+        dy=d*radius;
+        dx=sqrtf(radius*radius-dy*dy);
+        
+        if (d<sinf(M_PI*2.0/(float)n*(i)))
+            dx*=-1.0;
+            
+        glVertex2f(dx,dy);
+        
+    }
     glEnd();
+    
+    glTranslatef(x, y, 0.0);
 }
 
 void Circle::Move() {
