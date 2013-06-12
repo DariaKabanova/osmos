@@ -21,8 +21,8 @@ Field::Field(int countOfObjects) {
     
     // Записать в вектор соперников
     
-    for (int i=1; i<countOfObjects; i++)
-        this->v.push_back(CircleRival (i*20.0+10.0,i*20.0+10.0,10.0,color));
+    for (int i=0; i<countOfObjects; i++)
+        this->v.push_back(CircleRival (i*20.0+30.0,i*20.0+30.0,10.0,color));
 
 }
 
