@@ -22,28 +22,15 @@ void Circle::Draw() {
     // количество секторов, образующих круг
     int n=(int)(radius/2);
     
-    GLfloat dy=0.0;
-    GLfloat dx=radius;
-    GLfloat d=0.0;
+    GLfloat angle;
     
     // Рисование круга
     
-    glBegin(GL_TRIANGLES);
-
-    for (int i=0; i<n; i++) {
+    glBegin(GL_POLYGON);
     
-        glVertex2f(0.0, 0.0);
-        glVertex2f(dx, dy);
-        
-        d=sinf(M_PI*2.0/(float)n*(i+1));
-        dy=d*radius;
-        dx=sqrtf(radius*radius-dy*dy);
-        
-        if (d<sinf(M_PI*2.0/(float)n*(i)))
-            dx*=-1.0;
-            
-        glVertex2f(dx,dy);
-        
+    for (int i=0; i<n; i++) {
+        angle=2*M_PI*(float)i/n;
+        glVertex2f(cosf(angle)*radius, sinf(angle)*radius);
     }
     glEnd();
     
