@@ -39,6 +39,11 @@ private:
     
 };
 
+class CircleRival: private Circle {
+public:
+    CircleRival(){};
+};
+
 //const
 
 

@@ -21,22 +21,44 @@ void keyDown(unsigned char key, int x, int y) {
     
 }
 
+GLuint theCircle;
+
+static void circle(GLfloat *color) {
+    
+    
+    Circle circle (200.0,300.0,50.0,color);
+    
+    circle.Draw();
+}
+
+static void init(void) {
+    
+}
+
+GLfloat dx=0.0;
+
 // Функция рисования окна
 void display()
 {
+    
+    
+    //GLfloat color[3]={0.8,0.0,1.0};
+    
+    //Circle circle (200.0,300.0,50.0,color);
+    
+    //circle.Draw();
+    
+    theCircle=glGenLists(1);
+    glNewList(theCircle, GL_COMPILE);
+    GLfloat color[3]={0.8,0.0,1.0};
+    circle(color);
+    glEndList();
+    glShadeModel(GL_FLAT);
+    
     // Очистка буфера цвета
     glClear(GL_COLOR_BUFFER_BIT);
-    
-    GLfloat color[3]={0.8,0.0,1.0};
-    
-    Circle circle (200.0,300.0,50.0,color);
-    //circle=new Circle();
-    
-    //circle.Move();
-    
-    circle.Draw();
-    
-    
+    glCallList(theCircle);
+    glFlush();
     
     // Использование обмена буферов. Используется окно с двойной буферизацией.
     glutSwapBuffers();
@@ -68,17 +90,13 @@ void reshape(int width, int height)
 
 void idle() {
     // Очистка буфера цвета
-    //glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
     
+    //glutPostRedisplay(); //вызов функции display
     
-    
-    /*Circle * circle;
-    circle=new Circle();
-    
-    circle->Move();
-    
-    circle->Draw();*/
-    
+    glClear(GL_COLOR_BUFFER_BIT);
+    glCallList(theCircle);
+    glFlush();
     
     
     // Использование обмена буферов. Используется окно с двойной буферизацией.
@@ -109,7 +127,7 @@ int main(int argc, char** argv)
     glutKeyboardFunc(keyDown);
     
     // Установка функции обработки пустого события - glutIdleFunc(...) - необходимо для анимации
-    glutIdleFunc(idle);
+    //glutIdleFunc(idle);
     
     // Установка функции изменения размеров окна
     glutReshapeFunc(reshape);
