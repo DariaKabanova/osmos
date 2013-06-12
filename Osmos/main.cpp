@@ -21,18 +21,18 @@ void keyDown(unsigned char key, int x, int y) {
     
 }
 
+GLfloat spin=0.0;
+GLfloat color[3]={0.8,0.0,1.0};
+
+Circle circle (200.0,300.0,50.0,color);
+
 // Функция рисования окна
 void display()
 {
     // Очистка буфера цвета
     glClear(GL_COLOR_BUFFER_BIT);
     
-    GLfloat color[3]={0.8,0.0,1.0};
     
-    Circle circle (200.0,300.0,50.0,color);
-    //circle=new Circle();
-    
-    //circle.Move();
     
     circle.Draw();
     
@@ -66,23 +66,17 @@ void reshape(int width, int height)
     glLoadIdentity();
 }
 
-void idle() {
+void idle(void) {
     // Очистка буфера цвета
     //glClear(GL_COLOR_BUFFER_BIT);
-    
-    
-    
-    /*Circle * circle;
-    circle=new Circle();
-    
-    circle->Move();
-    
-    circle->Draw();*/
-    
+
+    spin=spin+1.0;
+    if(spin>360.0) spin=spin-360.0;
+    glutPostRedisplay();
     
     
     // Использование обмена буферов. Используется окно с двойной буферизацией.
-    glutSwapBuffers();
+    //glutSwapBuffers();
 }
 
 
@@ -108,11 +102,13 @@ int main(int argc, char** argv)
     
     glutKeyboardFunc(keyDown);
     
-    // Установка функции обработки пустого события - glutIdleFunc(...) - необходимо для анимации
-    glutIdleFunc(idle);
+    
     
     // Установка функции изменения размеров окна
     glutReshapeFunc(reshape);
+    
+    // Установка функции обработки пустого события - glutIdleFunc(...) - необходимо для анимации
+    glutIdleFunc(idle);
     
     // Установка цвета фона
     glClearColor(0,1,1,0.3);

@@ -17,7 +17,7 @@ void Circle::Draw() {
     glColor3fv(color);
     
     // смещение центра круга
-    glTranslatef(x, y, 0.0);
+    //glTranslatef(x, y, 0.0);
     
     // количество секторов, образующих круг
     int n=(int)(radius/2);
@@ -30,11 +30,11 @@ void Circle::Draw() {
     
     for (int i=0; i<n; i++) {
         angle=2*M_PI*(float)i/n;
-        glVertex2f(cosf(angle)*radius, sinf(angle)*radius);
+        glVertex2f(cosf(angle)*radius+x, sinf(angle)*radius+y);
     }
     glEnd();
     
-    glTranslatef(x, y, 0.0);
+    //glTranslatef(x, y, 0.0);
 }
 
 void Circle::Move() {
