@@ -30,6 +30,11 @@ public:
     
     void Draw(/*GLdouble x, GLdouble y*/);
     void Move();
+    void setNewParameters(GLfloat x, GLfloat y, GLfloat radius) {
+        this->x=x;
+        this->y=y;
+        this->radius=radius;
+    }
     
 private:
     GLfloat x;

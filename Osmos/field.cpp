@@ -8,7 +8,11 @@
 
 #include "field.h"
 
-Field::Field() {
-    Circle circle;//=new Circle();
-    Field::v.push_back(circle);
+Field::Field(int countOfObjects) {
+    GLfloat color[3]={0.8,0.0,1.0};
+    //std::vector<int> vect;
+    //vect.push_back(2);
+    //for (int i=0; i<countOfObjects; i++)
+    this->v.push_back(Circle (0.0,0.0,0.0,color));
+        //Field::v.push_back(Circle (0.0,0.0,0.0,NULL));
 }

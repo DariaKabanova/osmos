@@ -14,13 +14,11 @@
 #include "circle.h"
 #include <vector>
 
-using namespace std;
-
 
 class Field {
-private: vector<Circle> v;
+private: std::vector<Circle> v;
     
-public: Field();
+public: Field(int countOfObjects);
     
     
 };

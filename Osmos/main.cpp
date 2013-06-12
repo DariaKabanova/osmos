@@ -13,18 +13,16 @@
 #endif
 #include <OpenGL/OpenGL.h>
 #include "circle.h"
+#include "field.h"
 
-
-
-// Функция нажатия на клавишу key
-void keyDown(unsigned char key, int x, int y) {
-    
-}
 
 GLfloat spin=0.0;
 GLfloat color[3]={0.8,0.0,1.0};
-
 Circle circle (200.0,300.0,50.0,color);
+
+static void init(void) {
+    Field::Field field (10);
+}
 
 // Функция рисования окна
 void display()
@@ -33,7 +31,7 @@ void display()
     glClear(GL_COLOR_BUFFER_BIT);
     
     
-    
+    circle.setNewParameters(100.0+spin, 100.0, 30.0);
     circle.Draw();
     
     
@@ -67,16 +65,11 @@ void reshape(int width, int height)
 }
 
 void idle(void) {
-    // Очистка буфера цвета
-    //glClear(GL_COLOR_BUFFER_BIT);
+    
+    //spin+=0.1;
+    
+    //glutPostRedisplay(); //запуск функции display
 
-    spin=spin+1.0;
-    if(spin>360.0) spin=spin-360.0;
-    glutPostRedisplay();
-    
-    
-    // Использование обмена буферов. Используется окно с двойной буферизацией.
-    //glutSwapBuffers();
 }
 
 
@@ -93,16 +86,14 @@ int main(int argc, char** argv)
     
     glutCreateWindow("Osmos");
     
+    init();
+    
     // Установка параметров экрана и переход в полноэкранный режим
     //glutGameModeString("800x600:32");
     //glutEnterGameMode();
     
     // Установка функции рисования для текущего окна
     glutDisplayFunc(display);
-    
-    glutKeyboardFunc(keyDown);
-    
-    
     
     // Установка функции изменения размеров окна
     glutReshapeFunc(reshape);
