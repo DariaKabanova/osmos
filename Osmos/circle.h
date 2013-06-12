@@ -10,15 +10,18 @@
 #define __Osmos___ircle__
 
 #include <iostream>
+#include <OpenGL/OpenGL.h>
 
 class Circle {
-    public: Circle() {};
+    public:
+        Circle() {};
+        ~Circle() {}
     
-void Draw();
-    void Move();
+        void Draw(/*GLdouble x, GLdouble y*/);
+        void Move();
 };
 
-
+//const
 
 
 #endif /* defined(__Osmos___ircle__) */

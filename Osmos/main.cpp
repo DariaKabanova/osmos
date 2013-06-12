@@ -29,18 +29,21 @@ void display()
     
     
     
-    Circle * circle;
-    circle=new Circle();
+    Circle circle;
+    //circle=new Circle();
     
-    circle->Move();
+    circle.Move();
     
-    circle->Draw();
+    circle.Draw();
     
     
     
     // Использование обмена буферов. Используется окно с двойной буферизацией.
     glutSwapBuffers();
 }
+
+
+
 
 // Функция перерисовки при изменении размеров окна
 void reshape(int width, int height)
@@ -61,6 +64,25 @@ void reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
     
     glLoadIdentity();
+}
+
+void idle() {
+    // Очистка буфера цвета
+    //glClear(GL_COLOR_BUFFER_BIT);
+    
+    
+    
+    Circle * circle;
+    circle=new Circle();
+    
+    circle->Move();
+    
+    circle->Draw();
+    
+    
+    
+    // Использование обмена буферов. Используется окно с двойной буферизацией.
+    glutSwapBuffers();
 }
 
 
@@ -87,6 +109,7 @@ int main(int argc, char** argv)
     glutKeyboardFunc(keyDown);
     
     // Установка функции обработки пустого события - glutIdleFunc(...) - необходимо для анимации
+    glutIdleFunc(idle);
     
     // Установка функции изменения размеров окна
     glutReshapeFunc(reshape);

@@ -26,5 +26,5 @@ void Circle::Draw() {
 }
 
 void Circle::Move() {
-    glTranslatef(100, 100,0);
+    glTranslatef(10, 10,0);
 }
