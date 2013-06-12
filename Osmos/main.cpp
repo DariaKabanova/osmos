@@ -16,12 +16,14 @@
 #include "field.h"
 
 
-GLfloat spin=0.0;
-GLfloat color[3]={0.8,0.0,1.0};
-Circle circle (200.0,300.0,50.0,color);
+//GLfloat spin=0.0;
+//GLfloat color[3]={0.8,0.0,1.0};
+//Circle circle (200.0,300.0,50.0,color);
+
+Field field (10);
 
 static void init(void) {
-    Field::Field field (10);
+    
 }
 
 // Функция рисования окна
@@ -30,9 +32,10 @@ void display()
     // Очистка буфера цвета
     glClear(GL_COLOR_BUFFER_BIT);
     
+    field.draw();
     
-    circle.setNewParameters(100.0+spin, 100.0, 30.0);
-    circle.Draw();
+    //circle.setNewParameters(100.0+spin, 100.0, 30.0);
+    //circle.Draw();
     
     
     

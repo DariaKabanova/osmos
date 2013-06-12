@@ -18,7 +18,9 @@
 class Field {
 private: std::vector<Circle> v;
     
-public: Field(int countOfObjects);
+public:
+    Field(int countOfObjects);
+    void draw();
     
     
 };

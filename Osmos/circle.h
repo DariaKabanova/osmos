@@ -26,10 +26,9 @@ public:
         std::copy(color, color + COUNT_OF_COLORS, this->color);
         //memcpy(this->color,color,sizeof(GLfloat)*COUNT_OF_COLORS);
     }
-    ~Circle() {}
+    ~Circle() {};
     
-    void Draw(/*GLdouble x, GLdouble y*/);
-    void Move();
+    void draw(/*GLdouble x, GLdouble y*/);
     void setNewParameters(GLfloat x, GLfloat y, GLfloat radius) {
         this->x=x;
         this->y=y;
@@ -42,6 +41,16 @@ private:
     GLfloat radius;
     GLfloat color[COUNT_OF_COLORS];
     
+};
+
+class CircleRival: public Circle  {
+public:
+    CircleRival (GLfloat x, GLfloat y, GLfloat radius, GLfloat *color): Circle (x, y, radius, color) {};
+};
+
+class CircleUser: public Circle {
+public:
+    CircleUser (GLfloat x, GLfloat y, GLfloat radius, GLfloat *color): Circle (x, y, radius, color) {};
 };
 
 //const

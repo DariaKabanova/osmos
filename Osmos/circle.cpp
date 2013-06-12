@@ -11,7 +11,7 @@
 //#include <OpenGL/OpenGL.h>
 #include <GLUT/GLUT.h>
 
-void Circle::Draw() {
+void Circle::draw() {
     
     // Установка текущего цвета
     glColor3fv(color);
@@ -30,8 +30,4 @@ void Circle::Draw() {
         glVertex2f(cosf(angle)*radius+x, sinf(angle)*radius+y);
     }
     glEnd();
-}
-
-void Circle::Move() {
-    glTranslatef(10, 10,0);
 }

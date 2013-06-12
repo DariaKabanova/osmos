@@ -10,9 +10,24 @@
 
 Field::Field(int countOfObjects) {
     GLfloat color[3]={0.8,0.0,1.0};
-    //std::vector<int> vect;
-    //vect.push_back(2);
-    //for (int i=0; i<countOfObjects; i++)
-    this->v.push_back(Circle (0.0,0.0,0.0,color));
-        //Field::v.push_back(Circle (0.0,0.0,0.0,NULL));
+    
+    // Задать игрока
+    
+    this->v.push_back(CircleUser (10.0,10.0,12.0,color));
+    
+    // Посчитать распределение соперников
+    
+    
+    
+    // Записать в вектор соперников
+    
+    for (int i=1; i<countOfObjects; i++)
+        this->v.push_back(CircleRival (i*20.0+10.0,i*20.0+10.0,10.0,color));
+
+}
+
+void Field::draw() {
+    for (std::vector<Circle>::iterator i = v.begin(); i != v.end(); ++i)
+        i->draw();
+        
 }
