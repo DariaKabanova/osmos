@@ -62,6 +62,9 @@ public:
     
     void motion();
     
+    const GLfloat getX() {return x;}
+    const GLfloat getY() {return y;}
+    
 protected:
     const GLfloat k=1.0;
     GLfloat del=0.0;

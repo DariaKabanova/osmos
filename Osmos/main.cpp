@@ -15,7 +15,7 @@
 #include "circle.h"
 #include "field.h"
 
-#define COUNT_OF_RIVALS 4
+#define COUNT_OF_RIVALS 10
 #define WINDOW_WIDTH    512
 #define WINDOW_HEIGHT   512
 

@@ -16,16 +16,28 @@ Field::Field(int countOfObjects) {
     
     
     this->circles.push_back(new CircleUser (300.0,400.0,29.0,colorRed));
+
+    GLfloat radiusRival=20.0;
     
     // Посчитать распределение соперников
-    
-    
-    
-    // Записать в вектор соперников
-    
     for (int i=0; i<countOfObjects; i++) {
-        this->circles.push_back(new CircleRival (i*40.0+20.0,i*40.0+30.0,20.0,color));
-        this->circles.back()->move(0.1,.2);
+        bool t=true;
+        GLfloat x,y;
+        while (t) {
+            
+            x=rand()%512;
+            y=rand()%512;
+            for (std::vector<Circle *>::iterator j = circles.begin(); j != circles.end(); ++j) {
+                if (sqrtf((x+(*j)->getX())*(x+(*j)->getX())+(y+(*j)->getY())*(y+(*j)->getY()))>2*radiusRival) {
+                    t=false;
+                    break;
+                }
+            }
+        
+        }
+        // Записать в вектор соперников
+        this->circles.push_back(new CircleRival (x,y,radiusRival,color));
+        //this->circles.back()->move(0.1,.2);
     }
 
 }
