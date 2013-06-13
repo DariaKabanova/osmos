@@ -16,11 +16,14 @@
 
 
 class Field {
-private: std::vector<Circle> v;
+private:
+    std::vector<Circle> circles;
     
 public:
     Field(int countOfObjects);
     void draw();
+    void move();
+    void mouseClick(GLfloat dx, GLfloat dy);
     
     
 };

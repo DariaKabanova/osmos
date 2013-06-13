@@ -29,10 +29,10 @@ public:
     ~Circle() {};
     
     void draw(/*GLdouble x, GLdouble y*/);
-    void setNewParameters(GLfloat x, GLfloat y, GLfloat radius) {
-        this->x=x;
-        this->y=y;
-        this->radius=radius;
+    void setNewParameters(GLfloat dx, GLfloat dy, GLfloat radius) {
+        this->x=dx;
+        this->y=dy;
+        this->radius+=radius;
     }
     
 private:

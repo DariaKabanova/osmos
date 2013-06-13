@@ -71,10 +71,17 @@ void reshape(int width, int height)
 void idle(void) {
     
     //spin+=0.1;
+    field.move();
     
-    //glutPostRedisplay(); //запуск функции display
+    glutPostRedisplay(); //запуск функции display
 
 }
+
+void mouseClick(int button, int state, int x, int y) {
+    field.mouseClick(x, 512-y);
+}
+
+
 
 
 int main(int argc, char** argv)
@@ -90,7 +97,7 @@ int main(int argc, char** argv)
     
     glutCreateWindow("Osmos");
     
-    init();
+    //init();
     
     // Установка параметров экрана и переход в полноэкранный режим
     //glutGameModeString("800x600:32");
@@ -104,6 +111,8 @@ int main(int argc, char** argv)
     
     // Установка функции обработки пустого события - glutIdleFunc(...) - необходимо для анимации
     glutIdleFunc(idle);
+    
+    glutMouseFunc(mouseClick);
     
     // Установка цвета фона
     glClearColor(0,1,1,0.3);
