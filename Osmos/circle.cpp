@@ -8,8 +8,10 @@
 
 #include "circle.h"
 #include "math.h"
-//#include <OpenGL/OpenGL.h>
 #include <GLUT/GLUT.h>
+
+#define WINDOW_WIDTH    512
+#define WINDOW_HEIGHT   512
 
 void Circle::draw() {
     
@@ -17,7 +19,7 @@ void Circle::draw() {
     glColor3fv(color);
     
     // количество секторов, образующих круг
-    int n=(int)(radius/2);
+    int n=(int)(radius);
     
     GLfloat angle;
     
@@ -30,4 +32,27 @@ void Circle::draw() {
         glVertex2f(cosf(angle)*radius+x, sinf(angle)*radius+y);
     }
     glEnd();
+}
+
+// Проверка столкновений с границами окна
+void Circle::hitTheWall(GLfloat newX, GLfloat newY) {
+    if (newX-radius<0.0) {
+        x = -newX+2*radius;
+    }
+    else if (newX+radius>WINDOW_WIDTH) {
+        x=2*WINDOW_WIDTH-newX-2*radius;
+    }
+    else x=newX;
+    if (newY-radius<0.0) {
+        y = -newY+2*radius;
+    }
+    else if (newY+radius>WINDOW_HEIGHT) {
+        y=2*WINDOW_WIDTH-newY-2*radius;
+    }
+    else y=newY;
+   
+}
+ 
+void Circle::capture(Circle *circle) {
+
 }

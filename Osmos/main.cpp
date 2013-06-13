@@ -16,6 +16,8 @@
 #include "field.h"
 
 #define COUNT_OF_RIVALS 10
+#define WINDOW_WIDTH    512
+#define WINDOW_HEIGHT   512
 
 //GLfloat spin=0.0;
 //GLfloat color[3]={0.8,0.0,1.0};

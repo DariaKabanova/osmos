@@ -35,7 +35,8 @@ public:
         this->radius+=radius;
     }
     virtual void move(GLfloat x, GLfloat y) = 0;
-    void hitTheWall();
+    void hitTheWall(GLfloat newX, GLfloat newY);
+    void capture(Circle *circle);
     
 protected:
     GLfloat x;
@@ -48,17 +49,16 @@ protected:
 class CircleRival: public Circle  {
 public:
     CircleRival (GLfloat x, GLfloat y, GLfloat radius, GLfloat *color): Circle (x, y, radius, color) {};
-    virtual void move(GLfloat x, GLfloat y) {
-        this->x+=x;
+    void move(GLfloat x, GLfloat y) {
+        hitTheWall(this->x+x, this->y+y);
     }
 };
 
 class CircleUser: public Circle {
 public:
     CircleUser (GLfloat x, GLfloat y, GLfloat radius, GLfloat *color): Circle (x, y, radius, color) {};
-    void move(GLfloat x, GLfloat y) {
-        this->x+=this->x-x;
-        this->y+=this->y-y;
+    void move(GLfloat x, GLfloat y) { //координаты клика
+        hitTheWall(2*this->x-x, 2*this->y-y);
     }
 };
 

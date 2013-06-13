@@ -29,16 +29,22 @@ Field::Field(int countOfObjects) {
 }
 
 void Field::draw() {
-   for (std::vector<Circle *>::iterator i = circles.begin(); i != circles.end(); ++i)
+    for (std::vector<Circle *>::iterator i = circles.begin(); i != circles.end(); ++i)
         (*i)->draw();
         
 }
 
 void Field::move() {
-    //for (std::vector<Circle>::iterator i = circles.begin(); i != circles.end(); ++i)
-      //  i->setNewParameters(0.01, 0.0, 0.0);
+    for (std::vector<Circle *>::iterator i = circles.begin()+1; i != circles.end(); ++i)
+        (*i)->move(0.0,-1.0);
+    
 }
 
 void Field::mouseClick(GLfloat x, GLfloat y) {
     (*circles.begin())->move(x, y);
 }
+
+void Field::capture() {
+    
+}
+

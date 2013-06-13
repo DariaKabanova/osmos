@@ -24,6 +24,7 @@ public:
     void draw();
     void move();
     void mouseClick(GLfloat dx, GLfloat dy);
+    void capture();
     
     
 };
