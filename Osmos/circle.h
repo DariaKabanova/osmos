@@ -42,11 +42,11 @@ public:
     int capture(Circle *circle);
     
     const GLfloat getDistance(Circle *circle) {
-        return sqrtf((x-circle->x)*(x-circle->x)-(y-circle->y)*(y-circle->y));
+        return sqrtf((x-circle->x)*(x-circle->x)+(y-circle->y)*(y-circle->y));
     }
     
     const GLfloat getSquare() {
-        return radius*radius*M_PI/2;
+        return radius*radius*M_PI;
     }
     
     // Получить разницу площадей при уменьшении диаметра
@@ -65,7 +65,6 @@ public:
 protected:
     const GLfloat k=1.0;
     GLfloat del=0.0;
-    //GLfloat t=0.001;
     GLfloat x;
     GLfloat y;
     GLfloat radius;
@@ -79,7 +78,8 @@ class CircleRival: public Circle  {
 public:
     CircleRival (GLfloat x, GLfloat y, GLfloat radius, GLfloat *color): Circle (x, y, radius, color) {};
     void move(GLfloat x, GLfloat y) {
-        hitTheWall(this->x+x, this->y+y);
+        firstSpeedX=x;
+        firstSpeedY=y;
     }
 };
 
@@ -101,15 +101,10 @@ public:
         
         firstSpeedX+=temp_x;
         firstSpeedY+=temp_y;
-        
-        
-        
-        
-        //hitTheWall(2*this->x-x, 2*this->y-y);
+
     }
 };
 
-//const
 
 
 #endif /* defined(__Osmos___ircle__) */

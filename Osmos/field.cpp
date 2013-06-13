@@ -23,8 +23,10 @@ Field::Field(int countOfObjects) {
     
     // Записать в вектор соперников
     
-    for (int i=0; i<countOfObjects; i++)
+    for (int i=0; i<countOfObjects; i++) {
         this->circles.push_back(new CircleRival (i*40.0+30.0,i*40.0+30.0,20.0,color));
+        //this->circles.back()->move(0.5,.2);
+    }
 
 }
 
@@ -36,25 +38,28 @@ void Field::draw() {
 }
 
 void Field::move() {
-    for (std::vector<Circle *>::iterator i = circles.begin(); i != circles.end(); ++i)
+    //std::vector<Circle *>::iterator n=circles.end();
+    for (std::vector<Circle *>::iterator i = circles.begin(); i != circles.end(); ++i) {
         (*i)->motion();//(0.0,-1.0);
+        //for (std::vector<Circle *>::iterator j = circles.begin()+1; j != n; ++j) {
+            
+            
+        //}
+        
+    }
+    int flag=(*circles.begin())->capture(circles.back());
+    if (flag==2)
+    {
+        //circles.erase();
+        //.erase(circles.back());
+        //n=circles.end();
+        //j--;
+    }
     
 }
 
 void Field::mouseClick(GLfloat x, GLfloat y) {
     (*circles.begin())->move(x, y);
-    std::vector<Circle *>::iterator n=circles.end();
-    for (std::vector<Circle *>::iterator j = circles.begin()+1; j != n; ++j) {
-
-       int flag=(*circles.begin())->capture(*j);
-        if (flag==2)
-        {
-            circles.erase(j);
-            n=circles.end();
-            j--;
-        }
-        
-    }
     //capture();
 }
 
