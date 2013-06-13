@@ -21,6 +21,9 @@
 //GLfloat color[3]={0.8,0.0,1.0};
 //Circle circle (200.0,300.0,50.0,color);
 
+const int windowWidth=512;
+const int windowHeight=512;
+
 Field field (COUNT_OF_RIVALS);
 
 static void init(void) {
@@ -78,7 +81,7 @@ void idle(void) {
 }
 
 void mouseClick(int button, int state, int x, int y) {
-    field.mouseClick(x, 512-y);
+    if (state) field.mouseClick(x, windowHeight-y);
 }
 
 
@@ -90,7 +93,7 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     
     // Установка начального состояния окна
-    glutInitWindowSize(512, 512);
+    glutInitWindowSize(windowWidth, windowHeight);
      
     // Установка режима состояния экрана RGBA
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);

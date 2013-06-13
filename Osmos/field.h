@@ -17,7 +17,7 @@
 
 class Field {
 private:
-    std::vector<Circle> circles;
+    std::vector<Circle *> circles;
     
 public:
     Field(int countOfObjects);
