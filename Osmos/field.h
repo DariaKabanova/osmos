@@ -21,6 +21,7 @@ private:
     
 public:
     Field(int countOfObjects);
+    ~Field() {circles.~vector();}
     void draw();
     void move();
     void mouseClick(GLfloat dx, GLfloat dy);
