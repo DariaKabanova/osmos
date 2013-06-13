@@ -15,7 +15,7 @@
 #include "circle.h"
 #include "field.h"
 
-#define COUNT_OF_RIVALS 2
+#define COUNT_OF_RIVALS 4
 #define WINDOW_WIDTH    512
 #define WINDOW_HEIGHT   512
 
@@ -120,7 +120,7 @@ int main(int argc, char** argv)
     glutMouseFunc(mouseClick);
     
     // Установка цвета фона
-    glClearColor(0,1,1,0.3);
+    glClearColor(0.1,0.1,0.1,0.9);
     
     // Запуск механизма обработки событий
     glutMainLoop();
