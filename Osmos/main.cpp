@@ -76,9 +76,9 @@ void reshape(int width, int height)
 void idle(void) {
     
     //spin+=0.1;
-    field.move();
+    int result=field.move();
     
-    glutPostRedisplay(); //запуск функции display
+    if (!result) glutPostRedisplay(); //запуск функции display
 
 }
 

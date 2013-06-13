@@ -22,8 +22,7 @@ void Circle::draw() {
     
     GLfloat angle;
     
-    // Рисование круга
-    
+    // Рисование круга    
     glBegin(GL_POLYGON);
     
     for (int i=0; i<n; i++) {
@@ -75,14 +74,11 @@ int Circle::capture(Circle *circle) {
 // перерисовка в каждый момент времени
 void Circle::motion() {
     GLfloat lx,ly;// Путь, совершенный за время
-    del+=0.0001;
-    
+    del+=0.0001;    
     
     lx=firstSpeedX/exp(del);//+(-radius*k*x/(x*x+y*y))*t*t/2;
     ly=firstSpeedY/exp(del);//+(-radius*k*y/(x*x+y*y))*t*t/2;
-    
-
-    
+        
     hitTheWall(lx+x, ly+y);
 
 }

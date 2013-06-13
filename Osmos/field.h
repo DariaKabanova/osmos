@@ -23,7 +23,7 @@ public:
     Field(int countOfObjects);
     ~Field() {circles.~vector();}
     void draw();
-    void move();
+    int move();
     void mouseClick(GLfloat dx, GLfloat dy);
     void capture();
     
