@@ -9,7 +9,8 @@
 #ifndef __Osmos__field__
 #define __Osmos__field__
 
-#include <iostream>
+//#include <iostream>
+#include <cstdlib>
 
 #include "circle.h"
 #include <vector>

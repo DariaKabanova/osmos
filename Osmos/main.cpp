@@ -77,13 +77,14 @@ void reshape(int width, int height)
 
 void idle(void) {
     
-    if (!result) {
-        result=field.move();    
+    // {
+        result=field.move();
+    if (!result)
         glutPostRedisplay(); //запуск функции display
-    }
-    else {
+    //}
+    //else {
         
-    }
+    //}
 
 }
 

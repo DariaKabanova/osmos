@@ -7,6 +7,8 @@
 //
 
 #include "field.h"
+#include <iostream>
+#include <time.h>
 
 Field::Field(int countOfObjects) {
     GLfloat colorRed[3]={1.0,0.0,0.0};
@@ -20,17 +22,20 @@ Field::Field(int countOfObjects) {
     GLfloat radiusRival=20.0;
     
     // Посчитать распределение соперников
+    srand(time(0));
     for (int i=0; i<countOfObjects; i++) {
+
         bool t=true;
         GLfloat x,y;
         while (t) {
             t=false;
-            x=rand()%512;
-            y=rand()%512;
+            
+            x=GLfloat(std::rand()%(512-2*(int)radiusRival)+radiusRival);
+            y=GLfloat(std::rand()%(512-2*(int)radiusRival)+radiusRival);
             for (std::vector<Circle *>::iterator j = circles.begin(); j != circles.end(); ++j) {
-                if (sqrtf((x+(*j)->getX())*(x+(*j)->getX())+(y+(*j)->getY())*(y+(*j)->getY()))<=2*radiusRival) {
+                if (sqrtf((x-(*j)->getX())*(x-(*j)->getX())+(y-(*j)->getY())*(y-(*j)->getY()))<2*radiusRival+10.0) {
                     t=true;
-                    //break;
+                    break;
                 }
             }
         
@@ -39,6 +44,7 @@ Field::Field(int countOfObjects) {
         this->circles.push_back(new CircleRival (x,y,radiusRival,color));
         this->circles.back()->move(0.01,0.01);
     }
+    
 
 }
 

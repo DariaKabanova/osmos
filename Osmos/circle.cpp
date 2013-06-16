@@ -96,8 +96,8 @@ void CircleRival::motion() {
     GLfloat lx,ly;
     del=0.0001;
 
-    lx=firstSpeedX/exp(del);//+(-radius*k*x/(x*x+y*y))*t*t/2;
-    ly=firstSpeedY/exp(del);//+(-radius*k*y/(x*x+y*y))*t*t/2;
+    lx=firstSpeedX/exp(del)/radius;//+(-radius*k*x/(x*x+y*y))*t*t/2;
+    ly=firstSpeedY/exp(del)/radius;//+(-radius*k*y/(x*x+y*y))*t*t/2;
     hitTheWall(lx+x, ly+y);
     
 }
