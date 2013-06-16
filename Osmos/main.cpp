@@ -15,6 +15,7 @@
 #include "circle.h"
 #include "field.h"
 #include <string.h>
+#include "parson.h"
 
 #define COUNT_OF_RIVALS 50
 #define WINDOW_WIDTH    512
@@ -76,6 +77,43 @@ void init(void)
 {
     glShadeModel(GL_FLAT);
     makeRasterFont();
+    
+    
+    
+    // JSON десерилизация
+    JSON_Value *root_value;
+    JSON_Object *object;
+    
+    const char *filename = "/users/madmoron/Desktop/commits.json";
+    root_value = json_parse_file(filename);
+    
+    object = json_value_get_object(root_value);
+    
+    JSON_Object *objectUser;
+    objectUser=json_object_get_object(object, "user");
+    
+    JSON_Object *objectEnemy;
+    objectEnemy=json_object_get_object(object, "enemy");
+    
+    JSON_Array *color;
+    color=json_object_get_array(objectUser,"color");
+    
+    JSON_Array *color1;
+    color1=json_object_get_array(objectEnemy,"color1");
+    
+    JSON_Array *color2;
+    color2=json_object_get_array(objectEnemy,"color2");
+    
+    GLfloat userColor[3], enemyMinColor[3], enemyMaxColor[3];
+    
+    for (int i = 0; i < json_array_get_count(color); i++) {
+        userColor[i]=(GLfloat)json_array_get_number(color, i);
+        enemyMinColor[i]=(GLfloat)json_array_get_number(color1, i);
+        enemyMaxColor[i]=(GLfloat)json_array_get_number(color2, i);
+    }
+
+    int countOfEnemies=(int)json_object_get_number(objectEnemy, "count");
+
 }
 void printString(char *s) {
     glPushAttrib(GL_LIST_BIT);
