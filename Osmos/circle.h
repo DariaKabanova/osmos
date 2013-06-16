@@ -41,12 +41,18 @@ public:
     void hitTheWall(GLfloat newX, GLfloat newY);
     int capture(Circle *circle);
     
+    virtual void changeDirection(Circle * circle) = 0;
+    
     const GLfloat getDistance(Circle *circle) {
         return sqrtf((x-circle->x)*(x-circle->x)+(y-circle->y)*(y-circle->y));
     }
     
     const GLfloat getSquare() {
         return radius*radius*M_PI;
+    }
+    
+    const GLfloat getRadius() {
+        return radius;
     }
     
     // Получить разницу площадей при уменьшении диаметра
@@ -60,7 +66,7 @@ public:
         radius = sqrtf((getSquare() + dSquare)/M_PI);
     }
     
-    void motion();
+    virtual void motion() = 0;
     
     const GLfloat getX() {return x;}
     const GLfloat getY() {return y;}
@@ -81,8 +87,23 @@ class CircleRival: public Circle  {
 public:
     CircleRival (GLfloat x, GLfloat y, GLfloat radius, GLfloat *color): Circle (x, y, radius, color) {};
     void move(GLfloat x, GLfloat y) {
+        // Скорость должна зависеть от массы
+        // НАПРАВЛЕНИЕ ДОЛЖНО МЕНЯТЬСЯ В ЗАВИСИМОСТИ ОТ ПЛОЩАДИ
+        
+        // Расчет площади в радиусе просмотра
+        
+        
+        
+        
         firstSpeedX=x;
         firstSpeedY=y;
+    }
+    void motion();
+    void changeDirection(Circle * circle) { // Изменить направление скорости, если радиус circle больше, чем у this
+        if (circle->getRadius()>radius) { // Убегает, если больше
+            if ((x-circle->getX()<0 && firstSpeedX>0) || (x-circle->getX()>0 && firstSpeedX<0)) firstSpeedX*=-1;
+            if ((y-circle->getY()<0 && firstSpeedY>0) || (y-circle->getY()>0 && firstSpeedY<0)) firstSpeedY*=-1;
+        }
     }
 };
 
@@ -106,6 +127,8 @@ public:
         firstSpeedY+=temp_y;
 
     }
+    void motion();
+    void changeDirection(Circle * circle){};
 };
 
 

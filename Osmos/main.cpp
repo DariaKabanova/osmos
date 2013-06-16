@@ -15,7 +15,7 @@
 #include "circle.h"
 #include "field.h"
 
-#define COUNT_OF_RIVALS 10
+#define COUNT_OF_RIVALS 20
 #define WINDOW_WIDTH    512
 #define WINDOW_HEIGHT   512
 
@@ -25,6 +25,8 @@
 
 const int windowWidth=512;
 const int windowHeight=512;
+
+int result=0;
 
 Field field (COUNT_OF_RIVALS);
 
@@ -75,10 +77,13 @@ void reshape(int width, int height)
 
 void idle(void) {
     
-    //spin+=0.1;
-    int result=field.move();
-    
-    if (!result) glutPostRedisplay(); //запуск функции display
+    if (!result) {
+        result=field.move();    
+        glutPostRedisplay(); //запуск функции display
+    }
+    else {
+        
+    }
 
 }
 

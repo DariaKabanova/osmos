@@ -15,7 +15,7 @@ Field::Field(int countOfObjects) {
     // Задать игрока
     
     
-    this->circles.push_back(new CircleUser (300.0,400.0,29.0,colorRed));
+    this->circles.push_back(new CircleUser (512/2,512/2,20.0,colorRed));
 
     GLfloat radiusRival=20.0;
     
@@ -24,20 +24,20 @@ Field::Field(int countOfObjects) {
         bool t=true;
         GLfloat x,y;
         while (t) {
-            
+            t=false;
             x=rand()%512;
             y=rand()%512;
             for (std::vector<Circle *>::iterator j = circles.begin(); j != circles.end(); ++j) {
-                if (sqrtf((x+(*j)->getX())*(x+(*j)->getX())+(y+(*j)->getY())*(y+(*j)->getY()))>2*radiusRival) {
-                    t=false;
-                    break;
+                if (sqrtf((x+(*j)->getX())*(x+(*j)->getX())+(y+(*j)->getY())*(y+(*j)->getY()))<=2*radiusRival) {
+                    t=true;
+                    //break;
                 }
             }
         
         }
         // Записать в вектор соперников
         this->circles.push_back(new CircleRival (x,y,radiusRival,color));
-        //this->circles.back()->move(0.1,.2);
+        this->circles.back()->move(0.01,0.01);
     }
 
 }
@@ -52,6 +52,8 @@ int Field::move() {
     for (std::vector<Circle *>::iterator i = circles.begin(); i != n; ++i) {
         (*i)->motion();
         for (std::vector<Circle *>::iterator j = i+1; j != n; ++j) {
+            // изменить направление скорости
+            (*j)->changeDirection(*i);
             int flag=(*i)->capture(*j);
             if (flag==2)
             {

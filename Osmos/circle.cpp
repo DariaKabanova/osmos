@@ -71,8 +71,10 @@ int Circle::capture(Circle *circle) {
     return 0;
 }
 
+
+
 // перерисовка в каждый момент времени
-void Circle::motion() {
+void CircleUser::motion() {
     GLfloat lx,ly;// Путь, совершенный за время
     del+=0.0001;    
     
@@ -81,4 +83,21 @@ void Circle::motion() {
         
     hitTheWall(lx+x, ly+y);
 
+}
+
+///// СКОРОСТЬ ДОЛЖНА ЗАВИСЕТЬ ОТ МАССЫ
+////  МЕНЯТЬ НАПРАВЛЕНИЕ ДВИЖЕНИЯ
+
+void CircleRival::motion() {
+    
+    
+    
+    
+    GLfloat lx,ly;
+    del=0.0001;
+
+    lx=firstSpeedX/exp(del);//+(-radius*k*x/(x*x+y*y))*t*t/2;
+    ly=firstSpeedY/exp(del);//+(-radius*k*y/(x*x+y*y))*t*t/2;
+    hitTheWall(lx+x, ly+y);
+    
 }
