@@ -73,7 +73,9 @@ int Field::move() {
             if (flag==1) {
                 circles.erase(i);
                 n=circles.end();
+               
                 if (i==circles.begin()) return 2;
+                 break;
                 //i--;
 
                 } //съели другого

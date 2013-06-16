@@ -162,12 +162,11 @@ void reshape(int width, int height)
     
     glLoadIdentity();
 }
-float FPS;
-//float framesPerSecond=0.0f;
-float lastTime = 0.0f;
+
+
 
 bool calculateWatch() {
-    
+    static float lastTime = 0.0f;
     float currentTime = glutGet(GLUT_ELAPSED_TIME)*0.001f;
     if (currentTime-lastTime >= 1.0f/FPS_VALUE) {
         lastTime = currentTime;
@@ -178,17 +177,11 @@ bool calculateWatch() {
 }
 
 void idle(void) {
-    bool t=calculateWatch();
     
-            if (t && !result) {
-                result=field.move();
-                glutPostRedisplay(); //запуск функции display
-        
-        
-            }
-        
-        
-   
+    if (calculateWatch() && !result) {
+        result=field.move();
+        glutPostRedisplay(); //запуск функции display
+    } 
 }
 
 void mouseClick(int button, int state, int x, int y) {

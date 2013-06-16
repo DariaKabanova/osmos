@@ -80,7 +80,7 @@ public:
     }
     
 protected:
-    const GLfloat k=0.001;
+    const GLfloat k=0.0001;
     GLfloat del=0.0;
     GLfloat x;
     GLfloat y;
@@ -95,14 +95,6 @@ class CircleRival: public Circle  {
 public:
     CircleRival (GLfloat x, GLfloat y, GLfloat radius, GLfloat *color): Circle (x, y, radius, color) {};
     void move(GLfloat x, GLfloat y) {
-        // Скорость должна зависеть от массы
-        // НАПРАВЛЕНИЕ ДОЛЖНО МЕНЯТЬСЯ В ЗАВИСИМОСТИ ОТ ПЛОЩАДИ
-        
-        // Расчет площади в радиусе просмотра
-        
-        
-        
-        
         firstSpeedX=x;
         firstSpeedY=y;
     }
