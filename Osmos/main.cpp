@@ -124,12 +124,21 @@ void keyboard(unsigned char key,int x,int y) {
         default: break;
     
     }*/
-    if (key==13) {
+    if (key==27) {
+        exit(0);
         //Field field (COUNT_OF_RIVALS);
+    }
+    else if (key==13) {
+
+        //field.~Field();
+        field=(COUNT_OF_RIVALS);
+        result=0;
     }
 }
 
-
+void newGame() {
+    
+}
 
 
 // Функция перерисовки при изменении размеров окна
@@ -152,20 +161,45 @@ void reshape(int width, int height)
     
     glLoadIdentity();
 }
+float FPS;
+
+void calculateFPS() {
+    static float framesPerSecond = 0.0f;    //наши фпс
+    static float lastTime = 0.0f;           //Тут хранится время, прошедшее с последнего кадра
+    static char strFrameRate[50] = {0};     //Строка для вывода
+    //Тут мы получаем текущий tick count и умножаем его на 0.001 для конвертации из миллисекунд в секунды.
+    float currentTime = glutGet(GLUT_ELAPSED_TIME)*0.001f; //Время в миллисекундах от glutInit
+    
+    //Увеличиваем счетчик кадров
+    ++framesPerSecond;
+    
+    if (currentTime - lastTime > 1.0f) {
+        lastTime = currentTime;
+        
+        // Установим FPS для вывода:
+        FPS=framesPerSecond;
+        
+        //Сбросим FPS
+        framesPerSecond = 0;
+    }
+}
 
 void idle(void) {
     
+    
+    
+    //Теперь вычтем из текущего времени последнее запомненное время. Если результат больше единицы,
+    //это значит, что секунда прошла и нужно вывести новый FPS.
+    calculateFPS();
+    
     if (!result) {
         result=field.move();
-   
-        glutPostRedisplay();
+        glutPostRedisplay(); //запуск функции display
         
         
-        
-        //запуск функции display
     }
-    
-
+        
+   
 }
 
 void mouseClick(int button, int state, int x, int y) {

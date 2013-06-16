@@ -18,11 +18,12 @@
 
 class Field {
 private:
-    std::vector<Circle *> circles;
+    std::vector<Circle *> circles;// (51);
     
 public:
     Field(int countOfObjects);
-    ~Field() {circles.~vector();}
+    ~Field() {//circles.~vector();
+    }
     void draw();
     int move();
     void mouseClick(GLfloat dx, GLfloat dy);
