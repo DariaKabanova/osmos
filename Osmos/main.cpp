@@ -89,7 +89,9 @@ void idle(void) {
 }
 
 void mouseClick(int button, int state, int x, int y) {
-    if (state) field.mouseClick(x, windowHeight-y);
+    if (!state) {
+        field.mouseClick(x, windowHeight-y);
+    }
 }
 
 

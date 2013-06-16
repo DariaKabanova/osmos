@@ -71,6 +71,14 @@ public:
     const GLfloat getX() {return x;}
     const GLfloat getY() {return y;}
     
+    void setColor(GLfloat minRadius, GLfloat maxRadius, GLfloat *minColor, GLfloat *maxColor) {
+        GLfloat valueOfNormalized=0.5;
+        if (minRadius!=maxRadius)
+            valueOfNormalized=(radius-minRadius)/(maxRadius-minRadius);
+        for (int i=0; i<3; i++) 
+            color[i]=valueOfNormalized*(maxColor[i] - minColor[i])+minColor[i];
+    }
+    
 protected:
     const GLfloat k=1.0;
     GLfloat del=0.0;

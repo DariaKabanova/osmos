@@ -11,13 +11,13 @@
 #include <time.h>
 
 Field::Field(int countOfObjects) {
-    GLfloat colorRed[3]={1.0,0.0,0.0};
-    GLfloat color[3]={0.8,0.0,1.0};
+    //GLfloat colorRed[3]={1.0,0.0,0.0};
+    GLfloat color[3]={0.0,1.0,0.0};
     
     // Задать игрока
     
     
-    this->circles.push_back(new CircleUser (512/2,512/2,20.0,colorRed));
+    this->circles.push_back(new CircleUser (512/2,512/2,20.0,color));
 
     GLfloat radiusRival=20.0;
     
@@ -78,6 +78,19 @@ int Field::move() {
     for (std::vector<Circle *>::iterator i = circles.begin()+1; i != n; ++i)
         commonSquare+=(*i)->getSquare();
     if ((*circles.begin())->getSquare()>commonSquare) { return 1;}// Победа
+    
+    // Замена цвета в зависимости от радиуса
+    GLfloat minRadius=(*circles.begin())->getRadius(), maxRadius=minRadius;
+    for (std::vector<Circle *>::iterator i = circles.begin()+1; i != n; ++i) {
+        //найти максимальный и минимальный радиусы
+        if ((*i)->getRadius() < minRadius) minRadius=(*i)->getRadius();
+        if ((*i)->getRadius() > maxRadius) maxRadius=(*i)->getRadius();
+    }
+    for (std::vector<Circle *>::iterator i = circles.begin()+1; i != n; ++i) {
+        (*i)->setColor(minRadius, maxRadius, minColor, maxColor);
+    }
+    
+    
     return 0;
 }
 

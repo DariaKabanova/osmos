@@ -28,6 +28,9 @@ public:
     void mouseClick(GLfloat dx, GLfloat dy);
     void capture();
     
+    GLfloat maxColor[3]={1.0,0.0,0.0};
+    GLfloat minColor[3]={0.0,0.0,1.0};
+    
     
 };
 
