@@ -94,8 +94,12 @@ int Field::move() {
         if ((*i)->getRadius() < minRadius) minRadius=(*i)->getRadius();
         if ((*i)->getRadius() > maxRadius) maxRadius=(*i)->getRadius();
     }
+    GLfloat userRadius=(*circles.begin())->getRadius();
+    
     for (std::vector<Circle *>::iterator i = circles.begin()+1; i != n; ++i) {
-        (*i)->setColor(minRadius, maxRadius, minColor, maxColor);
+        
+        if ((*i)->getRadius()<userRadius) (*i)->setColor(minRadius, userRadius, minColor, maxColor);
+        else (*i)->setColor(userRadius, maxRadius, minColor, maxColor);
     }
     
     
