@@ -70,7 +70,13 @@ int Field::move() {
                 n=circles.end();
                 j--;
             }
-            if (flag==1) {return 2;}// Поражение
+            if (flag==1) {
+                circles.erase(i);
+                n=circles.end();
+                if (i==circles.begin()) return 2;
+                //i--;
+
+                } //съели другого
         }        
     }
     // Проверка на победу
