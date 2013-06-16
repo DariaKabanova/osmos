@@ -19,6 +19,7 @@
 #define COUNT_OF_RIVALS 50
 #define WINDOW_WIDTH    512
 #define WINDOW_HEIGHT   512
+#define FPS_VALUE       24
 
 //GLfloat spin=0.0;
 //GLfloat color[3]={0.8,0.0,1.0};
@@ -162,42 +163,30 @@ void reshape(int width, int height)
     glLoadIdentity();
 }
 float FPS;
+//float framesPerSecond=0.0f;
+float lastTime = 0.0f;
 
-void calculateFPS() {
-    static float framesPerSecond = 0.0f;    //наши фпс
-    static float lastTime = 0.0f;           //Тут хранится время, прошедшее с последнего кадра
-    static char strFrameRate[50] = {0};     //Строка для вывода
-    //Тут мы получаем текущий tick count и умножаем его на 0.001 для конвертации из миллисекунд в секунды.
-    float currentTime = glutGet(GLUT_ELAPSED_TIME)*0.001f; //Время в миллисекундах от glutInit
+bool calculateWatch() {
     
-    //Увеличиваем счетчик кадров
-    ++framesPerSecond;
-    
-    if (currentTime - lastTime > 1.0f) {
+    float currentTime = glutGet(GLUT_ELAPSED_TIME)*0.001f;
+    if (currentTime-lastTime >= 1.0f/FPS_VALUE) {
         lastTime = currentTime;
-        
-        // Установим FPS для вывода:
-        FPS=framesPerSecond;
-        
-        //Сбросим FPS
-        framesPerSecond = 0;
+        return true;
     }
+    return false;
+    
 }
 
 void idle(void) {
+    bool t=calculateWatch();
     
-    
-    
-    //Теперь вычтем из текущего времени последнее запомненное время. Если результат больше единицы,
-    //это значит, что секунда прошла и нужно вывести новый FPS.
-    calculateFPS();
-    
-    if (!result) {
-        result=field.move();
-        glutPostRedisplay(); //запуск функции display
+            if (t && !result) {
+                result=field.move();
+                glutPostRedisplay(); //запуск функции display
         
         
-    }
+            }
+        
         
    
 }

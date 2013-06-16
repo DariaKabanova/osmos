@@ -80,7 +80,7 @@ public:
     }
     
 protected:
-    const GLfloat k=1.0;
+    const GLfloat k=0.001;
     GLfloat del=0.0;
     GLfloat x;
     GLfloat y;

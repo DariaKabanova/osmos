@@ -45,7 +45,7 @@ Field::Field(int countOfObjects) {
         int multX=-1, multY=-1;
         if (rand()%2) multX=1;
         if (rand()%2) multY=1;
-        this->circles.back()->move(0.1*multX,0.1*multY);
+        this->circles.back()->move(10.1*multX,10.1*multY);
     }
     
 
