@@ -42,7 +42,10 @@ Field::Field(int countOfObjects) {
         }
         // Записать в вектор соперников
         this->circles.push_back(new CircleRival (x,y,radiusRival,color));
-        this->circles.back()->move(0.01,0.01);
+        int multX=-1, multY=-1;
+        if (rand()%2) multX=1;
+        if (rand()%2) multY=1;
+        this->circles.back()->move(0.1*multX,0.1*multY);
     }
     
 
