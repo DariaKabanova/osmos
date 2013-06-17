@@ -17,19 +17,33 @@ void Circle::draw() {
     // Установка текущего цвета
     glColor3fv(color);
     
+    // Рисование круга при помощи полигона
+    /*
     // количество секторов, образующих круг
     int n=(int)(radius);
     
     GLfloat angle;
-    
-    // Рисование круга    
+      
     glBegin(GL_POLYGON);
     
     for (int i=0; i<n; i++) {
         angle=2*M_PI*(float)i/n;
         glVertex2f(cosf(angle)*radius+x, sinf(angle)*radius+y);
     }
-    glEnd();
+    glEnd();*/
+    
+    // Рисования круга при квадратического объекта
+    
+    glTranslatef(x, y, 0.0);
+    
+    GLUquadricObj *quadricObj=gluNewQuadric();
+    GLint slices=(GLint)(radius/4+10);
+    
+    gluDisk (quadricObj, 0.0, radius, slices, 1);
+    gluDeleteQuadric (quadricObj);
+    
+    glTranslatef(-x, -y, 0.0);
+    
 }
 
 // Проверка столкновений с границами окна
