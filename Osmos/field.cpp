@@ -22,7 +22,7 @@ Field::Field(int countOfRivals, GLfloat windowWidth, GLfloat windowHeight, GLflo
     startNewGame();
 }
 
-
+// Начало новой игры
 void Field::startNewGame() {
     
     this->circles.clear();
@@ -62,11 +62,13 @@ void Field::startNewGame() {
     }
 }
 
+// Перерисовка объектов
 void Field::draw() {
     for (std::vector<Circle *>::iterator i = circles.begin(); i != circles.end(); ++i)
         (*i)->draw();        
 }
 
+// Перемещение объектов и проверка поглощений
 int Field::move() {
     // следующий за последним элементом в векторе circles
     std::vector<Circle *>::iterator n=circles.end();
@@ -115,6 +117,7 @@ int Field::move() {
     return 0;
 }
 
+// Событие клика мышки
 void Field::mouseClick(GLfloat x, GLfloat y) {
     (*circles.begin())->move(x, y);
 }
