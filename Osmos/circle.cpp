@@ -109,8 +109,8 @@ void CircleUser::move(GLfloat x, GLfloat y) { //координаты клика
     
     deceleration=0.0;
     
-    GLfloat temp_x=sqrtf(2/massIndex/radius)*x/(x*x+y*y);
-    GLfloat temp_y=sqrtf(2/massIndex/radius)*y/(x*x+y*y);
+    GLfloat temp_x=sqrtf(2/massIndex/radius);//*x/(x*x+y*y);
+    GLfloat temp_y=sqrtf(2/massIndex/radius);//*y/(x*x+y*y);
     
     if (this->x-x<0) temp_x*=-1;
     if (this->y-y<0) temp_y*=-1;
