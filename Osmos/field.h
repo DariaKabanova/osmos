@@ -18,7 +18,7 @@
 
 class Field {
 private:
-    std::vector<Circle *> circles;// (51);
+    std::vector<Circle *> circles;
     
 public:
     Field(int countOfRivals,GLfloat *userColor, GLfloat *minColor, GLfloat *maxColor);

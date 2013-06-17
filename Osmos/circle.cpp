@@ -9,8 +9,6 @@
 #include "circle.h"
 #include <GLUT/GLUT.h>
 
-
-
 // Рисование объекта
 void Circle::draw() {
     
@@ -97,7 +95,7 @@ void Circle::setColor(GLfloat minRadius, GLfloat maxRadius, GLfloat *minColor, G
 // Перемещение объекта
 void CircleUser::motion() {
     GLfloat lx,ly;// Путь, совершенный за время
-    deceleration+=0.0001;
+    deceleration+=0.01;
     
     lx=speedX/exp(deceleration);//+(-radius*k*x/(x*x+y*y))*t*t/2;
     ly=speedY/exp(deceleration);//+(-radius*k*y/(x*x+y*y))*t*t/2;

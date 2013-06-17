@@ -17,17 +17,14 @@
 #include <string.h>
 #include "parson.h"
 
-#define COUNT_OF_RIVALS 10
-#define WINDOW_WIDTH    512
-#define WINDOW_HEIGHT   512
 #define FPS_VALUE       24
 
-const int windowWidth=512;
-const int windowHeight=512;
 Field *field;
+int result=0;
 
 GLubyte space[]=        {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
 
+// Установка шрифта
 GLubyte letters[][13]={ {0x00,0x00,0xc3,0xc3,0xc3,0xc3,0xff,0xc3,0xc3,0xc3,0x66,0x3c,0x18},
                         {0x00,0x00,0xfe,0xc7,0xc3,0xc3,0xc7,0xfe,0xc7,0xc3,0xc3,0xc7,0xfe},
                         {0x00,0x00,0x7e,0x7e,0xc0,0xc0,0xc0,0xc0,0xc0,0xc0,0xc0,0xe7,0x7e},
@@ -75,13 +72,11 @@ void init(void)
     glShadeModel(GL_FLAT);
     makeRasterFont();
     
-    
-    
     // JSON десерилизация
     JSON_Value *root_value;
     JSON_Object *object;
     
-    const char *filename = "/users/madmoron/Desktop/commits.json";
+    const char *filename = "/users/madmoron/Desktop/config.json";
     root_value = json_parse_file(filename);
     
     object = json_value_get_object(root_value);
@@ -111,20 +106,16 @@ void init(void)
 
     int countOfEnemies=(int)json_object_get_number(objectEnemy, "count");
     
-    field=new Field(countOfEnemies,windowWidth,windowHeight,userColor,enemyMinColor,enemyMaxColor);
+    field=new Field(countOfEnemies,userColor,enemyMinColor,enemyMaxColor);
 
 }
+// Напечатать надпись
 void printString(char *s) {
     glPushAttrib(GL_LIST_BIT);
     glListBase(fontOffset);
     glCallLists(strlen(s),GL_UNSIGNED_BYTE,(GLubyte*)s);
     glPopAttrib();
 }
-
-int result=0;
-
-
-
 
 
 // Функция рисования окна
@@ -175,6 +166,7 @@ bool calculateWatch() {
     
 }
 
+
 void idle(void) {
     
     if (calculateWatch() && !result) {
@@ -185,8 +177,29 @@ void idle(void) {
 
 void mouseClick(int button, int state, int x, int y) {
     if (!state) {
-        field->mouseClick(x, windowHeight-y);
+        field->mouseClick(x, WINDOW_HEIGHT-y);
     }
+}
+
+// Функция перерисовки при изменении размеров окна
+void reshape(int width, int height)
+{
+    // Перестройка вывода, установка области вывода изображения
+    glViewport(0,0,width,height);
+    
+    // Загрузка матрицы проекции
+    glMatrixMode(GL_PROJECTION);
+    
+    // Замена матрицы проекции единичной
+    glLoadIdentity();
+    
+    // Установка ортогональной проекции
+    gluOrtho2D(0,width,0,height);
+    
+    // Загрузка модельно-видовой матрицы
+    glMatrixMode(GL_MODELVIEW);
+    
+    glLoadIdentity();
 }
 
 int main(int argc, char** argv)
@@ -195,7 +208,7 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     
     // Установка начального состояния окна
-    glutInitWindowSize(windowWidth, windowHeight);
+    glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
      
     // Установка режима состояния экрана RGBA
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
@@ -209,6 +222,9 @@ int main(int argc, char** argv)
     
     // Установка функции обработки пустого события
     glutIdleFunc(idle);
+    
+    // Установка функции изменения размеров окна
+    glutReshapeFunc(reshape);
     
     glutMouseFunc(mouseClick);
     
