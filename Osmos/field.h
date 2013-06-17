@@ -21,7 +21,7 @@ private:
     std::vector<Circle *> circles;// (51);
     
 public:
-    Field(int countOfRivals, GLfloat windowWidth, GLfloat windowHeight, GLfloat *userColor, GLfloat *minColor, GLfloat *maxColor);
+    Field(int countOfRivals,GLfloat *userColor, GLfloat *minColor, GLfloat *maxColor);
     ~Field() {
         for (std::vector<Circle *>::iterator i = circles.begin()+1; i != circles.end(); ++i)
             delete (CircleRival*)(*i);
@@ -44,8 +44,6 @@ protected:
     GLfloat maxColor[COUNT_OF_COLORS];  /* цвет самого большого объекта */
     GLfloat minColor[COUNT_OF_COLORS];  /* цвет самого маленького объекта */
     GLfloat userColor[COUNT_OF_COLORS]; /* цвет пользовательского объекта */
-    GLfloat windowWidth;                /* ширина окна */
-    GLfloat windowHeight;               /* высота окна */
     int countOfRivals;                  /* количество противников */
     
     

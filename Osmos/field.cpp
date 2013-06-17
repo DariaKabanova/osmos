@@ -10,13 +10,11 @@
 #include <iostream>
 #include <time.h>
 
-Field::Field(int countOfRivals, GLfloat windowWidth, GLfloat windowHeight, GLfloat *userColor, GLfloat *minColor, GLfloat *maxColor) {
+Field::Field(int countOfRivals, GLfloat *userColor, GLfloat *minColor, GLfloat *maxColor) {
     
     std::copy(minColor, minColor + COUNT_OF_COLORS, this->minColor);
     std::copy(maxColor, maxColor + COUNT_OF_COLORS, this->maxColor);
     std::copy(userColor, userColor + COUNT_OF_COLORS, this->userColor);
-    this->windowWidth=windowWidth;
-    this->windowHeight=windowHeight;
     this->countOfRivals=countOfRivals;
 
     startNewGame();
@@ -27,10 +25,11 @@ void Field::startNewGame() {
     
     this->circles.clear();
     
-    GLfloat radius=sqrtf(windowHeight*windowWidth/countOfRivals/20); //5% пространства занято объектами
+    GLfloat radius=sqrtf(WINDOW_WIDTH*WINDOW_HEIGHT/countOfRivals/20); //5% пространства занято объектами
     
     // Создать игрока
-    this->circles.push_back(new CircleUser (512/2,512/2,radius,userColor));
+    this->circles.push_back(new CircleUser (WINDOW_WIDTH/2,WINDOW_HEIGHT/2,radius));
+    this->circles.back()->setColor(userColor);
     
     // Посчитать распределение соперников, чтобы они не перекрывали друг друга
     srand(time(0));
@@ -40,8 +39,8 @@ void Field::startNewGame() {
         GLfloat x,y;
         while (t) {
             t=false;
-            x=GLfloat(std::rand()%(512-2*(int)radius)+radius);
-            y=GLfloat(std::rand()%(512-2*(int)radius)+radius);
+            x=GLfloat(std::rand()%(WINDOW_WIDTH-2*(int)radius)+radius);
+            y=GLfloat(std::rand()%(WINDOW_HEIGHT-2*(int)radius)+radius);
             for (std::vector<Circle *>::iterator j = circles.begin(); j != circles.end(); ++j) {
                 if (sqrtf((x-(*j)->getX())*(x-(*j)->getX())+(y-(*j)->getY())*(y-(*j)->getY()))<2*radius+10.0) {
                     t=true;
@@ -51,7 +50,7 @@ void Field::startNewGame() {
         }
         
         // Записать в вектор соперников
-        this->circles.push_back(new CircleRival (x,y,radius,userColor));
+        this->circles.push_back(new CircleRival (x,y,radius));
         this->circles.back()->setColor(radius, radius, minColor, maxColor);
         
         // Установить скорость

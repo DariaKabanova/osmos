@@ -10,6 +10,8 @@
 #define __Osmos___ircle__
 
 #define COUNT_OF_COLORS 3
+#define WINDOW_WIDTH    512
+#define WINDOW_HEIGHT   512
 
 #include <iostream>
 #include <algorithm>
@@ -19,41 +21,64 @@
 class Circle {
 public:
     Circle() {};
-    Circle(GLfloat x, GLfloat y, GLfloat radius, GLfloat *color)
+    Circle(GLfloat x, GLfloat y, GLfloat radius)
     {        
         this->x=x;
         this->y=y;
         this->radius=radius;
-        std::copy(color, color + COUNT_OF_COLORS, this->color);
-        this->firstSpeedX=0.0;
-        firstSpeedY=0.0;
-        //memcpy(this->color,color,sizeof(GLfloat)*COUNT_OF_COLORS);
+
     }
     ~Circle() {};
     
-    void draw(/*GLdouble x, GLdouble y*/);
+    // Нарисовать объект
+    void draw();
+    
+    // Установить новые параметры для объекта
     void setNewParameters(GLfloat dx, GLfloat dy, GLfloat radius) {
         this->x=dx;
         this->y=dy;
         this->radius+=radius;
     }
+    
+    // Работа со скоростью объекта
     virtual void move(GLfloat x, GLfloat y) = 0;
+    
+    // Отталкивание от стен
     void hitTheWall(GLfloat newX, GLfloat newY);
+    
+    // Проверка поглощения объекта
     int capture(Circle *circle);
     
-    virtual void changeDirection(Circle * circle) = 0;
+    // Изменить направление скорости, если радиус circle больше, чем у this
+    void changeDirection(Circle * circle) {
+        if (circle->getRadius()>radius) { // Убегает, если больше
+            if ((x-circle->getX()<0 && speedX>0) || (x-circle->getX()>0 && speedX<0)) speedX*=-1;
+            if ((y-circle->getY()<0 && speedY>0) || (y-circle->getY()>0 && speedY<0)) speedY*=-1;
+        }
+    }
     
+    // Расстояние до другого объекта
     const GLfloat getDistance(Circle *circle) {
         return sqrtf((x-circle->x)*(x-circle->x)+(y-circle->y)*(y-circle->y));
     }
     
+    // Площадь объекта
     const GLfloat getSquare() {
         return radius*radius*M_PI;
     }
     
+    // Радиус
     const GLfloat getRadius() {
         return radius;
     }
+    
+    // Установить цвет
+    void setColor(GLfloat *color) {
+        std::copy(color, color + COUNT_OF_COLORS, this->color);
+    }
+    
+    // Установить цвет, который зависит от размера объекта
+    void setColor(GLfloat minRadius, GLfloat maxRadius, GLfloat *minColor, GLfloat *maxColor);
     
     // Получить разницу площадей при уменьшении диаметра
     GLfloat getTheDifferenceSquares(GLfloat dRadius) {
@@ -61,74 +86,59 @@ public:
         this->radius-=dRadius;
         return lastSquare-getSquare();
     }
+    
     // Увеличить площадь объекта на deltaSquare
     void increaseSquare(GLfloat dSquare) {
         radius = sqrtf((getSquare() + dSquare)/M_PI);
     }
     
+    // Перемещение объекта
     virtual void motion() = 0;
     
+    // Возратить координаты объекта
     const GLfloat getX() {return x;}
     const GLfloat getY() {return y;}
     
-    void setColor(GLfloat minRadius, GLfloat maxRadius, GLfloat *minColor, GLfloat *maxColor) {
-        GLfloat valueOfNormalized=0.5;
-        if (minRadius!=maxRadius)
-            valueOfNormalized=(radius-minRadius)/(maxRadius-minRadius);
-        for (int i=0; i<3; i++) 
-            color[i]=valueOfNormalized*(maxColor[i] - minColor[i])+minColor[i];
-    }
+    
     
 protected:
-    const GLfloat k=0.0001;
-    GLfloat del=0.0;
-    GLfloat x;
+    GLfloat x;                         
     GLfloat y;
-    GLfloat radius;
-    GLfloat color[COUNT_OF_COLORS];
-    GLfloat firstSpeedX;
-    GLfloat firstSpeedY;
+    GLfloat radius;                 /* радиус объекта */
+    GLfloat color[COUNT_OF_COLORS]; /* цвет объекта */
+    GLfloat speedX=0.0;             /* проекция скорости объекта на ось X */
+    GLfloat speedY=0.0;             /* проекция скорости объекта на ось Y */
     
 };
 
 class CircleRival: public Circle  {
 public:
-    CircleRival (GLfloat x, GLfloat y, GLfloat radius, GLfloat *color): Circle (x, y, radius, color) {};
+    CircleRival (GLfloat x, GLfloat y, GLfloat radius): Circle (x, y, radius) {};
+    
+    // Работа со скоростью объекта
     void move(GLfloat x, GLfloat y) {
-        firstSpeedX=x;
-        firstSpeedY=y;
+        speedX=x;
+        speedY=y;
     }
+    
+    // Перемещение объекта
     void motion();
-    void changeDirection(Circle * circle) { // Изменить направление скорости, если радиус circle больше, чем у this
-        if (circle->getRadius()>radius) { // Убегает, если больше
-            if ((x-circle->getX()<0 && firstSpeedX>0) || (x-circle->getX()>0 && firstSpeedX<0)) firstSpeedX*=-1;
-            if ((y-circle->getY()<0 && firstSpeedY>0) || (y-circle->getY()>0 && firstSpeedY<0)) firstSpeedY*=-1;
-        }
-    }
+    
+    
 };
 
 class CircleUser: public Circle {
 public:
-    CircleUser (GLfloat x, GLfloat y, GLfloat radius, GLfloat *color): Circle (x, y, radius, color) {};
-    void move(GLfloat x, GLfloat y) { //координаты клика
-        GLfloat Sx=2*this->x-x;
-        GLfloat Sy=2*this->y-y;
-        GLfloat S=sqrtf(Sx*Sx+Sy*Sy);
-        
-        del=0;
-        
-        GLfloat temp_x=sqrtf(2*S/k/radius)*x/(x*x+y*y);
-        GLfloat temp_y=sqrtf(2*S/k/radius)*y/(x*x+y*y);
-        
-        if (this->x-x<0) temp_x*=-1;
-        if (this->y-y<0) temp_y*=-1;
-        
-        firstSpeedX+=temp_x;
-        firstSpeedY+=temp_y;
-
-    }
+    CircleUser (GLfloat x, GLfloat y, GLfloat radius): Circle (x, y, radius) {};
+    
+    // Работа со скоростью объекта
+    void move(GLfloat x, GLfloat y);
+    
+    // Перемещение объекта
     void motion();
-    void changeDirection(Circle * circle){};
+protected:
+    const GLfloat massIndex=0.0001; /* коэффициент для получения массы при помощи радиуса */
+    GLfloat deceleration=0.0;       /* коэффициент замедления */
 };
 
 

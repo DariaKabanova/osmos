@@ -135,6 +135,7 @@ void display()
     
     field->draw();
     
+    // Вывод сообщений о конце игры
     if (result) {
         glColor3f(1.0, 1.0, 1.0);
         glRasterPos2i(WINDOW_WIDTH/2-70,WINDOW_HEIGHT/2);
@@ -143,60 +144,25 @@ void display()
         if (result==2)      
             printString("YOU ARE A LOSER");
         glFlush();
-    }
-    
-    
+    } 
     
     // Использование обмена буферов. Используется окно с двойной буферизацией.
     glutSwapBuffers();
 }
 
 void keyboard(unsigned char key,int x,int y) {
-    /*switch((int)key) {
+    switch((int)key) {
         case 27: {
+            delete field;
             exit(0);
             break; }
         case 13: { //Заново начать игру
-            Field field (COUNT_OF_RIVALS);
+            field->startNewGame();
+            result=0;
             break; }
         default: break;
-    
-    }*/
-    if (key==27) {
-        exit(0);
-        //Field field (COUNT_OF_RIVALS);
-    }
-    else if (key==13) {
-
-        //field.~Field();
-        //field->~Field();
-        //
-        result=0;
     }
 }
-
-// Функция перерисовки при изменении размеров окна
-void reshape(int width, int height)
-{
-    // Перестройка вывода, установка области вывода изображения
-    glViewport(0,0,width,height);
-    
-    // Загрузка матрицы проекции
-    glMatrixMode(GL_PROJECTION);
-    
-    // Замена матрицы проекции единичной
-    glLoadIdentity();
-    
-    // Установка ортогональной проекции
-    gluOrtho2D(0,width,0,height);
-    
-    // Загрузка модельно-видовой матрицы
-    glMatrixMode(GL_MODELVIEW);
-    
-    glLoadIdentity();
-}
-
-
 
 bool calculateWatch() {
     static float lastTime = 0.0f;
@@ -237,18 +203,11 @@ int main(int argc, char** argv)
     glutCreateWindow("Osmos");
     
     init();
-    
-    // Установка параметров экрана и переход в полноэкранный режим
-    //glutGameModeString("800x600:32");
-    //glutEnterGameMode();
-    
+
     // Установка функции рисования для текущего окна
     glutDisplayFunc(display);
     
-    // Установка функции изменения размеров окна
-    glutReshapeFunc(reshape);
-    
-    // Установка функции обработки пустого события - glutIdleFunc(...) - необходимо для анимации
+    // Установка функции обработки пустого события
     glutIdleFunc(idle);
     
     glutMouseFunc(mouseClick);
@@ -260,6 +219,8 @@ int main(int argc, char** argv)
     
     // Запуск механизма обработки событий
     glutMainLoop();
+    
+    delete field;
     
     return 0;
 }
