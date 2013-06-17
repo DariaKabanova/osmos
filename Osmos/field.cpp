@@ -10,18 +10,18 @@
 #include <iostream>
 #include <time.h>
 
-Field::Field(int countOfObjects) {
-    //GLfloat colorRed[3]={1.0,0.0,0.0};
-    GLfloat color[3]={0.0,1.0,0.0};
+Field::Field(int countOfObjects, GLfloat windowWidth, GLfloat windowHeight, GLfloat *userColor, GLfloat *minColor, GLfloat *maxColor) {
     
-    // Задать игрока
+    std::copy(minColor, minColor + COUNT_OF_COLORS, this->minColor);
+    std::copy(maxColor, maxColor + COUNT_OF_COLORS, this->maxColor);
+    std::copy(userColor, userColor + COUNT_OF_COLORS, this->userColor);
     
+    GLfloat radius=sqrtf(windowHeight*windowWidth/countOfObjects/20); //5% пространства занято объектами
     
-    this->circles.push_back(new CircleUser (512/2,512/2,20.0,color));
-
-    GLfloat radiusRival=20.0;
+    // Создать игрока
+    this->circles.push_back(new CircleUser (512/2,512/2,radius,userColor));
     
-    // Посчитать распределение соперников
+    // Посчитать распределение соперников, чтобы они не перекрывали друг друга
     srand(time(0));
     for (int i=0; i<countOfObjects; i++) {
 
@@ -29,23 +29,25 @@ Field::Field(int countOfObjects) {
         GLfloat x,y;
         while (t) {
             t=false;
-            
-            x=GLfloat(std::rand()%(512-2*(int)radiusRival)+radiusRival);
-            y=GLfloat(std::rand()%(512-2*(int)radiusRival)+radiusRival);
+            x=GLfloat(std::rand()%(512-2*(int)radius)+radius);
+            y=GLfloat(std::rand()%(512-2*(int)radius)+radius);
             for (std::vector<Circle *>::iterator j = circles.begin(); j != circles.end(); ++j) {
-                if (sqrtf((x-(*j)->getX())*(x-(*j)->getX())+(y-(*j)->getY())*(y-(*j)->getY()))<2*radiusRival+10.0) {
+                if (sqrtf((x-(*j)->getX())*(x-(*j)->getX())+(y-(*j)->getY())*(y-(*j)->getY()))<2*radius+10.0) {
                     t=true;
                     break;
                 }
-            }
-        
+            }        
         }
+        
         // Записать в вектор соперников
-        this->circles.push_back(new CircleRival (x,y,radiusRival,color));
+        this->circles.push_back(new CircleRival (x,y,radius,userColor));
+        this->circles.back()->setColor(radius, radius, minColor, maxColor);
+        
+        // Установить скорость
         int multX=-1, multY=-1;
         if (rand()%2) multX=1;
         if (rand()%2) multY=1;
-        this->circles.back()->move(10.1*multX,10.1*multY);
+        this->circles.back()->move(10.0*multX,10.0*multY);
     }
     
 
@@ -94,14 +96,14 @@ int Field::move() {
         if ((*i)->getRadius() < minRadius) minRadius=(*i)->getRadius();
         if ((*i)->getRadius() > maxRadius) maxRadius=(*i)->getRadius();
     }
+    
+    // Радиус пользовательского объекта
     GLfloat userRadius=(*circles.begin())->getRadius();
     
     for (std::vector<Circle *>::iterator i = circles.begin()+1; i != n; ++i) {
-        
         if ((*i)->getRadius()<userRadius) (*i)->setColor(minRadius, userRadius, minColor, maxColor);
         else (*i)->setColor(userRadius, maxRadius, minColor, maxColor);
     }
-    
     
     return 0;
 }

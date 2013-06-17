@@ -21,16 +21,18 @@ private:
     std::vector<Circle *> circles;// (51);
     
 public:
-    Field(int countOfObjects);
-    ~Field() {//circles.~vector();
-    }
+    Field() {};
+    //Field(int countOfObjects);
+    Field(int countOfObjects, GLfloat windowWidth, GLfloat windowHeight, GLfloat *userColor, GLfloat *minColor, GLfloat *maxColor);
+    ~Field() {}
     void draw();
     int move();
     void mouseClick(GLfloat dx, GLfloat dy);
     void capture();
     
-    GLfloat maxColor[3]={1.0,0.0,0.0};
-    GLfloat minColor[3]={0.0,0.0,1.0};
+    GLfloat maxColor[COUNT_OF_COLORS];//={1.0,0.0,0.0};
+    GLfloat minColor[COUNT_OF_COLORS];//={0.0,0.0,1.0};
+    GLfloat userColor[COUNT_OF_COLORS];
     
     
 };

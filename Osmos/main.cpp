@@ -17,17 +17,14 @@
 #include <string.h>
 #include "parson.h"
 
-#define COUNT_OF_RIVALS 50
+#define COUNT_OF_RIVALS 10
 #define WINDOW_WIDTH    512
 #define WINDOW_HEIGHT   512
 #define FPS_VALUE       24
 
-//GLfloat spin=0.0;
-//GLfloat color[3]={0.8,0.0,1.0};
-//Circle circle (200.0,300.0,50.0,color);
-
 const int windowWidth=512;
 const int windowHeight=512;
+Field *field;
 
 GLubyte space[]=        {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
 
@@ -113,6 +110,8 @@ void init(void)
     }
 
     int countOfEnemies=(int)json_object_get_number(objectEnemy, "count");
+    
+    field=new Field(countOfEnemies,windowWidth,windowHeight,userColor,enemyMinColor,enemyMaxColor);
 
 }
 void printString(char *s) {
@@ -124,7 +123,7 @@ void printString(char *s) {
 
 int result=0;
 
-Field field (COUNT_OF_RIVALS);
+
 
 
 
@@ -134,7 +133,7 @@ void display()
     // Очистка буфера цвета
     glClear(GL_COLOR_BUFFER_BIT);
     
-    field.draw();
+    field->draw();
     
     if (result) {
         glColor3f(1.0, 1.0, 1.0);
@@ -170,15 +169,11 @@ void keyboard(unsigned char key,int x,int y) {
     else if (key==13) {
 
         //field.~Field();
-        field=(COUNT_OF_RIVALS);
+        //field->~Field();
+        //
         result=0;
     }
 }
-
-void newGame() {
-    
-}
-
 
 // Функция перерисовки при изменении размеров окна
 void reshape(int width, int height)
@@ -217,14 +212,14 @@ bool calculateWatch() {
 void idle(void) {
     
     if (calculateWatch() && !result) {
-        result=field.move();
+        result=field->move();
         glutPostRedisplay(); //запуск функции display
     } 
 }
 
 void mouseClick(int button, int state, int x, int y) {
     if (!state) {
-        field.mouseClick(x, windowHeight-y);
+        field->mouseClick(x, windowHeight-y);
     }
 }
 
