@@ -10,21 +10,32 @@
 #include <iostream>
 #include <time.h>
 
-Field::Field(int countOfObjects, GLfloat windowWidth, GLfloat windowHeight, GLfloat *userColor, GLfloat *minColor, GLfloat *maxColor) {
+Field::Field(int countOfRivals, GLfloat windowWidth, GLfloat windowHeight, GLfloat *userColor, GLfloat *minColor, GLfloat *maxColor) {
     
     std::copy(minColor, minColor + COUNT_OF_COLORS, this->minColor);
     std::copy(maxColor, maxColor + COUNT_OF_COLORS, this->maxColor);
     std::copy(userColor, userColor + COUNT_OF_COLORS, this->userColor);
+    this->windowWidth=windowWidth;
+    this->windowHeight=windowHeight;
+    this->countOfRivals=countOfRivals;
+
+    startNewGame();
+}
+
+
+void Field::startNewGame() {
     
-    GLfloat radius=sqrtf(windowHeight*windowWidth/countOfObjects/20); //5% пространства занято объектами
+    this->circles.clear();
+    
+    GLfloat radius=sqrtf(windowHeight*windowWidth/countOfRivals/20); //5% пространства занято объектами
     
     // Создать игрока
     this->circles.push_back(new CircleUser (512/2,512/2,radius,userColor));
     
     // Посчитать распределение соперников, чтобы они не перекрывали друг друга
     srand(time(0));
-    for (int i=0; i<countOfObjects; i++) {
-
+    for (int i=0; i<countOfRivals; i++) {
+        
         bool t=true;
         GLfloat x,y;
         while (t) {
@@ -36,7 +47,7 @@ Field::Field(int countOfObjects, GLfloat windowWidth, GLfloat windowHeight, GLfl
                     t=true;
                     break;
                 }
-            }        
+            }
         }
         
         // Записать в вектор соперников
@@ -49,8 +60,6 @@ Field::Field(int countOfObjects, GLfloat windowWidth, GLfloat windowHeight, GLfl
         if (rand()%2) multY=1;
         this->circles.back()->move(10.0*multX,10.0*multY);
     }
-    
-
 }
 
 void Field::draw() {
@@ -59,6 +68,7 @@ void Field::draw() {
 }
 
 int Field::move() {
+    // следующий за последним элементом в векторе circles
     std::vector<Circle *>::iterator n=circles.end();
     for (std::vector<Circle *>::iterator i = circles.begin(); i != n; ++i) {
         (*i)->motion();
@@ -66,21 +76,18 @@ int Field::move() {
             // изменить направление скорости
             (*j)->changeDirection(*i);
             int flag=(*i)->capture(*j);
-            if (flag==2)
-            {
+            if (flag==2) {// был поглощен j-ый
                 circles.erase(j);
                 n=circles.end();
                 j--;
             }
-            if (flag==1) {
+            if (flag==1) {// был поглощен i-ый
                 circles.erase(i);
                 n=circles.end();
                
-                if (i==circles.begin()) return 2;
-                 break;
-                //i--;
-
-                } //съели другого
+                if (i==circles.begin()) return 2;// Проигрыш
+                break;
+            }
         }        
     }
     // Проверка на победу
