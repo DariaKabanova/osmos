@@ -137,7 +137,7 @@ public:
     // Перемещение объекта
     void motion();
 protected:
-    const GLfloat massIndex=0.001;  /* коэффициент для получения массы при помощи радиуса */
+    const GLfloat massIndex=0.0005;  /* коэффициент для получения массы при помощи радиуса */
     GLfloat deceleration=0.0;       /* коэффициент замедления */
 };
 

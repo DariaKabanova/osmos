@@ -23,6 +23,9 @@ const char *filename = "/users/madmoron/Desktop/config.json";// располож
 
 Field *field;
 int result=0;
+bool stateClick=false;
+int mouse_x=0;
+int mouse_y=0;
 
 GLubyte space[]=        {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
 
@@ -167,19 +170,25 @@ bool calculateWatch() {
     
 }
 
-
 void idle(void) {
     
     if (calculateWatch() && !result) {
+        if (stateClick) field->mouseClick(mouse_x, WINDOW_HEIGHT-mouse_y);
         result=field->move();
         glutPostRedisplay(); //запуск функции display
-    } 
+    }
+    
 }
 
 void mouseClick(int button, int state, int x, int y) {
     if (!state) {
-        field->mouseClick(x, WINDOW_HEIGHT-y);
+        //field->mouseClick(x, WINDOW_HEIGHT-y);
+        stateClick=true;
+        mouse_x=x;
+        mouse_y=y;
+        
     }
+    else stateClick=false;
 }
 
 // Функция перерисовки при изменении размеров окна

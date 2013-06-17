@@ -106,14 +106,11 @@ void CircleUser::motion() {
 
 // Работа со скоростью объекта
 void CircleUser::move(GLfloat x, GLfloat y) { //координаты клика
-    GLfloat Sx=2*this->x-x;
-    GLfloat Sy=2*this->y-y;
-    GLfloat S=sqrtf(Sx*Sx+Sy*Sy);
     
     deceleration=0.0;
     
-    GLfloat temp_x=sqrtf(2*S/massIndex/radius)*x/(x*x+y*y);
-    GLfloat temp_y=sqrtf(2*S/massIndex/radius)*y/(x*x+y*y);
+    GLfloat temp_x=sqrtf(2/massIndex/radius)*x/(x*x+y*y);
+    GLfloat temp_y=sqrtf(2/massIndex/radius)*y/(x*x+y*y);
     
     if (this->x-x<0) temp_x*=-1;
     if (this->y-y<0) temp_y*=-1;
