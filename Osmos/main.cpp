@@ -19,6 +19,8 @@
 
 #define FPS_VALUE       24
 
+const char *filename = "/users/madmoron/Desktop/config.json";// расположение конфига
+
 Field *field;
 int result=0;
 
@@ -75,8 +77,7 @@ void init(void)
     // JSON десерилизация
     JSON_Value *root_value;
     JSON_Object *object;
-    
-    const char *filename = "/users/madmoron/Desktop/config.json";
+
     root_value = json_parse_file(filename);
     
     object = json_value_get_object(root_value);
