@@ -97,6 +97,15 @@ int Field::move() {
         commonSquare+=(*i)->getSquare();
     if ((*circles.begin())->getSquare()>commonSquare) { return 1;}// Победа
     
+    // Проверка на поражение
+    bool check=true;
+    for (std::vector<Circle *>::iterator i = circles.begin()+1; i != n; ++i)
+        if ((*i)->getSquare()<=(*circles.begin())->getSquare()) {
+            check=false;
+            break;
+        }
+    if (check) return 2;
+    
     // Замена цвета в зависимости от радиуса
     GLfloat minRadius=(*circles.begin())->getRadius(), maxRadius=minRadius;
     for (std::vector<Circle *>::iterator i = circles.begin()+1; i != n; ++i) {
