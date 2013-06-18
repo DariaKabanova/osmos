@@ -47,10 +47,10 @@ public:
     void hitTheWall(GLfloat newX, GLfloat newY);
     
     // Проверка поглощения объекта
-    int capture(Circle *circle);
+    int capture(std::shared_ptr<Circle> circle);
     
     // Изменить направление скорости, если радиус circle больше, чем у this
-    void changeDirection(Circle * circle) {
+    void changeDirection(std::shared_ptr<Circle> circle) {
         if (circle->getRadius()>radius) { // Убегает, если больше
             if ((x-circle->getX()<0 && speedX>0) || (x-circle->getX()>0 && speedX<0)) speedX*=-1;
             if ((y-circle->getY()<0 && speedY>0) || (y-circle->getY()>0 && speedY<0)) speedY*=-1;
@@ -58,7 +58,7 @@ public:
     }
     
     // Расстояние до другого объекта
-    const GLfloat getDistance(Circle *circle) {
+    const GLfloat getDistance(std::shared_ptr<Circle> circle) {
         return sqrtf((x-circle->x)*(x-circle->x)+(y-circle->y)*(y-circle->y));
     }
     

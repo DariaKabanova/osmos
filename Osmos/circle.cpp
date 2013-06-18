@@ -70,7 +70,7 @@ void Circle::hitTheWall(GLfloat newX, GLfloat newY) {
 }
 
 // Проверка поглощений объектов
-int Circle::capture(Circle *circle) {
+int Circle::capture(std::shared_ptr<Circle> circle) {
     GLfloat intersectionValue=radius+circle->radius-getDistance(circle);
     if (intersectionValue>0.0) {
         if (radius>=circle->radius) 
