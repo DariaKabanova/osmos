@@ -42,7 +42,7 @@ void Field::startNewGame() {
             t=false;
             x=GLfloat(std::rand()%(WINDOW_WIDTH-2*(int)radius)+radius);
             y=GLfloat(std::rand()%(WINDOW_HEIGHT-2*(int)radius)+radius);
-            for (std::vector<std::shared_ptr<Circle>>::iterator j = circles.begin(); j != circles.end(); ++j) {
+            for (auto j = circles.begin(); j != circles.end(); ++j) {
                 if (sqrtf((x-(*j)->getX())*(x-(*j)->getX())+(y-(*j)->getY())*(y-(*j)->getY()))<2*radius+10.0) {
                     t=true;
                     break;
@@ -64,17 +64,17 @@ void Field::startNewGame() {
 
 // Перерисовка объектов
 void Field::draw() {
-    for (std::vector<std::shared_ptr<Circle>>::iterator i = circles.begin(); i != circles.end(); ++i)
+    for (auto i = circles.begin(); i != circles.end(); ++i)
         (*i)->draw();        
 }
 
 // Перемещение объектов и проверка поглощений
 int Field::move() {
     // следующий за последним элементом в векторе circles
-    std::vector<std::shared_ptr<Circle>>::iterator n=circles.end();
-    for (std::vector<std::shared_ptr<Circle>>::iterator i = circles.begin(); i != n; ++i) {
+    auto n=circles.end();
+    for (auto i = circles.begin(); i != n; ++i) {
         (*i)->motion();
-        for (std::vector<std::shared_ptr<Circle>>::iterator j = i+1; j != n; ++j) {
+        for (auto j = i+1; j != n; ++j) {
             // изменить направление скорости
             (*j)->changeDirection(*i);
             int flag=(*i)->capture(*j);
@@ -94,13 +94,13 @@ int Field::move() {
     }
     // Проверка на победу
     GLfloat commonSquare=0.0;
-    for (std::vector<std::shared_ptr<Circle>>::iterator i = circles.begin()+1; i != n; ++i)
+    for (auto i = circles.begin()+1; i != n; ++i)
         commonSquare+=(*i)->getSquare();
     if ((*circles.begin())->getSquare()>commonSquare) { return 1;}// Победа
     
     // Проверка на поражение
     bool check=true;
-    for (std::vector<std::shared_ptr<Circle>>::iterator i = circles.begin()+1; i != n; ++i)
+    for (auto i = circles.begin()+1; i != n; ++i)
         if ((*i)->getSquare()<=(*circles.begin())->getSquare()) {
             check=false;
             break;
@@ -109,7 +109,7 @@ int Field::move() {
     
     // Замена цвета в зависимости от радиуса
     GLfloat minRadius=(*circles.begin())->getRadius(), maxRadius=minRadius;
-    for (std::vector<std::shared_ptr<Circle>>::iterator i = circles.begin()+1; i != n; ++i) {
+    for (auto i = circles.begin()+1; i != n; ++i) {
         //найти максимальный и минимальный радиусы
         if ((*i)->getRadius() < minRadius) minRadius=(*i)->getRadius();
         if ((*i)->getRadius() > maxRadius) maxRadius=(*i)->getRadius();
@@ -118,7 +118,7 @@ int Field::move() {
     // Радиус пользовательского объекта
     GLfloat userRadius=(*circles.begin())->getRadius();
     
-    for (std::vector<std::shared_ptr<Circle>>::iterator i = circles.begin()+1; i != n; ++i) {
+    for (auto i = circles.begin()+1; i != n; ++i) {
         if ((*i)->getRadius()<userRadius) (*i)->setColor(minRadius, userRadius, minColor, maxColor);
         else (*i)->setColor(userRadius, maxRadius, minColor, maxColor);
     }
