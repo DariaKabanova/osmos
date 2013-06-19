@@ -21,7 +21,7 @@
 
 const char *filename = "/users/madmoron/Desktop/config.json";// расположение конфига
 
-Field *field;
+std::shared_ptr<Field> field;
 int result=0;
 bool stateClick=false;
 int mouse_x=0;
@@ -110,7 +110,7 @@ void init(void)
 
     int countOfEnemies=(int)json_object_get_number(objectEnemy, "count");
     
-    field=new Field(countOfEnemies,userColor,enemyMinColor,enemyMaxColor);
+    field=std::make_shared<Field> (countOfEnemies,userColor,enemyMinColor,enemyMaxColor);
 
 }
 // Напечатать надпись
@@ -148,7 +148,7 @@ void display()
 void keyboard(unsigned char key,int x,int y) {
     switch((int)key) {
         case 27: {
-            delete field;
+            //delete field;
             exit(0);
             break; }
         case 13: { //Заново начать игру
@@ -246,7 +246,7 @@ int main(int argc, char** argv)
     // Запуск механизма обработки событий
     glutMainLoop();
     
-    delete field;
+    //delete field;
     
     return 0;
 }
