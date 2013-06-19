@@ -42,8 +42,8 @@ void Field::startNewGame() {
             t=false;
             x=GLfloat(std::rand()%(WINDOW_WIDTH-2*(int)radius)+radius);
             y=GLfloat(std::rand()%(WINDOW_HEIGHT-2*(int)radius)+radius);
-            for (auto j = circles.begin(); j != circles.end(); ++j) {
-                if (sqrtf((x-(*j)->getX())*(x-(*j)->getX())+(y-(*j)->getY())*(y-(*j)->getY()))<2*radius+10.0) {
+            for (auto j: circles) {
+                if (sqrtf((x-j->getX())*(x-j->getX())+(y-j->getY())*(y-j->getY()))<2*radius+10.0) {
                     t=true;
                     break;
                 }
@@ -64,8 +64,8 @@ void Field::startNewGame() {
 
 // Перерисовка объектов
 void Field::draw() {
-    for (auto i = circles.begin(); i != circles.end(); ++i)
-        (*i)->draw();        
+    for (auto i: circles)
+        i->draw();        
 }
 
 // Перемещение объектов и проверка поглощений
@@ -81,7 +81,7 @@ int Field::move() {
             if (flag==2) {// был поглощен j-ый
                 circles.erase(j);
                 n=circles.end();
-                j--;
+                --j;
             }
             if (flag==1) {// был поглощен i-ый
                 circles.erase(i);
@@ -110,6 +110,7 @@ int Field::move() {
     // Замена цвета в зависимости от радиуса
     GLfloat minRadius=(*circles.begin())->getRadius(), maxRadius=minRadius;
     for (auto i = circles.begin()+1; i != n; ++i) {
+        //std::advance(i, 1);
         //найти максимальный и минимальный радиусы
         if ((*i)->getRadius() < minRadius) minRadius=(*i)->getRadius();
         if ((*i)->getRadius() > maxRadius) maxRadius=(*i)->getRadius();

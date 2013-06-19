@@ -228,6 +228,7 @@
 		2F4ABA68176764A500EC6CB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = "($USER_NAME)/boost_1_53_0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -235,6 +236,7 @@
 		2F4ABA69176764A500EC6CB0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = "($USER_NAME)/boost_1_53_0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
