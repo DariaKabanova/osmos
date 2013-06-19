@@ -148,7 +148,6 @@ void display()
 void keyboard(unsigned char key,int x,int y) {
     switch((int)key) {
         case 27: {
-            //delete field;
             exit(0);
             break; }
         case 13: { //Заново начать игру
@@ -245,8 +244,6 @@ int main(int argc, char** argv)
     
     // Запуск механизма обработки событий
     glutMainLoop();
-    
-    //delete field;
     
     return 0;
 }
