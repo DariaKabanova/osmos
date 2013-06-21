@@ -70,15 +70,15 @@ void Circle::hitTheWall(GLfloat newX, GLfloat newY) {
 }
 
 // Проверка поглощений объектов
-int Circle::capture(std::shared_ptr<Circle> circle) {
-    GLfloat intersectionValue=radius+circle->radius-getDistance(circle);
+int Circle::capture(Circle& circle) {
+    GLfloat intersectionValue=radius+circle.radius-getDistance(circle);
     if (intersectionValue>0.0) {
-        if (radius>=circle->radius) 
-            increaseSquare(circle->getTheDifferenceSquares(intersectionValue));
+        if (radius>=circle.radius)
+            increaseSquare(circle.getTheDifferenceSquares(intersectionValue));
         else
-            circle->increaseSquare(getTheDifferenceSquares(intersectionValue));
+            circle.increaseSquare(getTheDifferenceSquares(intersectionValue));
         if (radius<=0.0) return 1;
-        if (circle->radius<=0.0) return 2;
+        if (circle.radius<=0.0) return 2;
     }
     return 0;
 }

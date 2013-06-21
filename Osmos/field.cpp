@@ -76,8 +76,8 @@ int Field::move() {
         (*i)->motion();
         for (auto j = i+1; j != n; ++j) {
             // изменить направление скорости
-            (*j)->changeDirection(*i);
-            int flag=(*i)->capture(*j);
+            (*j)->changeDirection(**i);
+            int flag=(*i)->capture(**j);
             if (flag==2) {// был поглощен j-ый
                 circles.erase(j);
                 n=circles.end();

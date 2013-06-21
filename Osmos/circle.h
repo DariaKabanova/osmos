@@ -43,23 +43,26 @@ public:
     // Работа со скоростью объекта
     virtual void move(GLfloat x, GLfloat y) = 0;
     
+    // Перемещение объекта
+    virtual void motion() = 0;
+    
     // Отталкивание от стен
     void hitTheWall(GLfloat newX, GLfloat newY);
     
     // Проверка поглощения объекта
-    int capture(std::shared_ptr<Circle> circle);
+    int capture(Circle& circle);
     
     // Изменить направление скорости, если радиус circle больше, чем у this
-    void changeDirection(std::shared_ptr<Circle> circle) {
-        if (circle->getRadius()>radius) { // Убегает, если больше
-            if ((x-circle->getX()<0 && speedX>0) || (x-circle->getX()>0 && speedX<0)) speedX*=-1;
-            if ((y-circle->getY()<0 && speedY>0) || (y-circle->getY()>0 && speedY<0)) speedY*=-1;
+    void changeDirection(Circle& circle) {
+        if (circle.getRadius()>radius) { // Убегает, если больше
+            if ((x-circle.getX()<0 && speedX>0) || (x-circle.getX()>0 && speedX<0)) speedX*=-1;
+            if ((y-circle.getY()<0 && speedY>0) || (y-circle.getY()>0 && speedY<0)) speedY*=-1;
         }
     }
     
     // Расстояние до другого объекта
-    const GLfloat getDistance(std::shared_ptr<Circle> circle) {
-        return sqrtf((x-circle->x)*(x-circle->x)+(y-circle->y)*(y-circle->y));
+    const GLfloat getDistance(Circle& circle) {
+        return sqrtf((x-circle.x)*(x-circle.x)+(y-circle.y)*(y-circle.y));
     }
     
     // Площадь объекта
@@ -91,9 +94,6 @@ public:
     void increaseSquare(GLfloat dSquare) {
         radius = sqrtf((getSquare() + dSquare)/M_PI);
     }
-    
-    // Перемещение объекта
-    virtual void motion() = 0;
     
     // Возратить координаты объекта
     const GLfloat getX() {return x;}
