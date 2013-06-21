@@ -42,6 +42,7 @@ protected:
     GLfloat maxColor[COUNT_OF_COLORS];  /* цвет самого большого объекта */
     GLfloat minColor[COUNT_OF_COLORS];  /* цвет самого маленького объекта */
     GLfloat userColor[COUNT_OF_COLORS]; /* цвет пользовательского объекта */
+    GLfloat midColor[COUNT_OF_COLORS];  /* цвет объекта, равного по размеру пользовательскому */
     int countOfRivals;                  /* количество противников */
     
     

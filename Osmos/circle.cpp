@@ -85,9 +85,9 @@ int Circle::capture(Circle& circle) {
 
 // Установить цвет, который зависит от размера объекта
 void Circle::setColor(GLfloat minRadius, GLfloat maxRadius, GLfloat *minColor, GLfloat *maxColor) {
-    GLfloat valueOfNormalized=0.5;
-    if (minRadius!=maxRadius)
-        valueOfNormalized=(radius-minRadius)/(maxRadius-minRadius);
+    //GLfloat valueOfNormalized=0.5;
+    //if (minRadius!=maxRadius)
+        GLfloat valueOfNormalized=(radius-minRadius)/(maxRadius-minRadius);
     for (int i=0; i<3; i++)
         color[i]=valueOfNormalized*(maxColor[i] - minColor[i])+minColor[i];
 }

@@ -16,6 +16,10 @@ Field::Field(int countOfRivals, GLfloat *userColor, GLfloat *minColor, GLfloat *
     std::copy(minColor, minColor + COUNT_OF_COLORS, this->minColor);
     std::copy(maxColor, maxColor + COUNT_OF_COLORS, this->maxColor);
     std::copy(userColor, userColor + COUNT_OF_COLORS, this->userColor);
+    
+    for (int i=0; i<COUNT_OF_COLORS; i++)
+        midColor[i]=0.5*(maxColor[i]+minColor[i]);
+    
     this->countOfRivals=countOfRivals;
 
     startNewGame();
@@ -52,7 +56,7 @@ void Field::startNewGame() {
         
         // Записать в вектор соперников
         this->circles.push_back(std::make_shared<CircleRival> (x,y,radius));
-        this->circles.back()->setColor(radius, radius, minColor, maxColor);
+        this->circles.back()->setColor(midColor);
         
         // Установить скорость
         int multX=-1, multY=-1;
@@ -119,9 +123,14 @@ int Field::move() {
     // Радиус пользовательского объекта
     GLfloat userRadius=(*circles.begin())->getRadius();
     
-    for (auto i = circles.begin()+1; i != n; ++i) {
-        if ((*i)->getRadius()<userRadius) (*i)->setColor(minRadius, userRadius, minColor, maxColor);
-        else (*i)->setColor(userRadius, maxRadius, minColor, maxColor);
+    for (auto i=circles.begin()+1; i!=circles.end(); ++i) {
+        if ((*i)->getRadius()==userRadius)
+            (*i)->setColor(midColor);
+        else {
+            if ((*i)->getRadius()<=userRadius)
+            (*i)->setColor(minRadius, userRadius, minColor, midColor);
+        else (*i)->setColor(userRadius, maxRadius, midColor, maxColor);
+        }
     }
     
     return 0;
