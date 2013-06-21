@@ -24,10 +24,7 @@ private:
 public:
     Field(int countOfRivals,GLfloat *userColor, GLfloat *minColor, GLfloat *maxColor);
     ~Field() {
-        /*for (std::vector<std::shared_ptr<Circle>>::iterator i = circles.begin()+1; i != circles.end(); ++i)
-            delete (CircleRival*)(*i);
-        delete (CircleUser*)(*circles.begin());
-        circles.clear();*/
+        circles.clear();
     }
     // Перерисока объектов
     void draw();
