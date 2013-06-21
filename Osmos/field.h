@@ -45,8 +45,6 @@ protected:
     GLfloat midColor[COUNT_OF_COLORS];  /* цвет объекта, равного по размеру пользовательскому */
     int countOfRivals;                  /* количество противников */
     
-    
-    
 };
 
 

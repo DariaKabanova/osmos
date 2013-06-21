@@ -65,8 +65,6 @@ void Circle::hitTheWall(GLfloat newX, GLfloat newY) {
         speedY*=-1;
     }
     else y=newY;
-    
-    
 }
 
 // Проверка поглощений объектов
@@ -77,19 +75,17 @@ int Circle::capture(Circle& circle) {
             increaseSquare(circle.getTheDifferenceSquares(intersectionValue));
         else
             circle.increaseSquare(getTheDifferenceSquares(intersectionValue));
-        if (radius<=0.0) return 1;
-        if (circle.radius<=0.0) return 2;
+        if (radius<=1.0) return 1;
+        if (circle.radius<=1.0) return 2;
     }
     return 0;
 }
 
 // Установить цвет, который зависит от размера объекта
 void Circle::setColor(GLfloat minRadius, GLfloat maxRadius, GLfloat *minColor, GLfloat *maxColor) {
-    //GLfloat valueOfNormalized=0.5;
-    //if (minRadius!=maxRadius)
-        GLfloat valueOfNormalized=(radius-minRadius)/(maxRadius-minRadius);
+    GLfloat valueOfNormalized=(radius-minRadius)/(maxRadius-minRadius);
     for (int i=0; i<3; i++)
-        color[i]=valueOfNormalized*(maxColor[i] - minColor[i])+minColor[i];
+        color[i]=valueOfNormalized*(maxColor[i] - minColor[i]) + minColor[i];
 }
 
 // Перемещение объекта
