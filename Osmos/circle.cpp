@@ -9,6 +9,13 @@
 #include "circle.h"
 #include <GLUT/GLUT.h>
 
+Circle::Circle(GLfloat x, GLfloat y, GLfloat radius) {
+    this->x=x;
+    this->y=y;
+    this->radius=radius;
+}
+
+
 // Рисование объекта
 void Circle::draw() {
     
@@ -79,6 +86,14 @@ int Circle::capture(Circle& circle) {
         if (circle.radius<=1.0) return 2;
     }
     return 0;
+}
+
+// Изменить направление скорости, если радиус circle больше, чем у this
+void Circle::changeDirection(Circle& circle) {
+    if (circle.getRadius()>radius) { // Убегает, если больше
+        if ((x-circle.getX()<0 && speedX>0) || (x-circle.getX()>0 && speedX<0)) speedX*=-1;
+        if ((y-circle.getY()<0 && speedY>0) || (y-circle.getY()>0 && speedY<0)) speedY*=-1;
+    }
 }
 
 // Установить цвет, который зависит от размера объекта

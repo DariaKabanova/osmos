@@ -19,26 +19,19 @@
 #include <OpenGL/OpenGL.h>
 
 class Circle {
+protected:
+    GLfloat x;
+    GLfloat y;
+    GLfloat radius;                 /* радиус объекта */
+    GLfloat color[COUNT_OF_COLORS]; /* цвет объекта */
+    GLfloat speedX=0.0;             /* проекция скорости объекта на ось X */
+    GLfloat speedY=0.0;             /* проекция скорости объекта на ось Y */
+    
 public:
-    Circle() {};
-    Circle(GLfloat x, GLfloat y, GLfloat radius)
-    {        
-        this->x=x;
-        this->y=y;
-        this->radius=radius;
-
-    }
-    ~Circle() {};
+    Circle(GLfloat x, GLfloat y, GLfloat radius);
     
     // Нарисовать объект
     void draw();
-    
-    // Установить новые параметры для объекта
-    void setNewParameters(GLfloat dx, GLfloat dy, GLfloat radius) {
-        this->x=dx;
-        this->y=dy;
-        this->radius+=radius;
-    }
     
     // Работа со скоростью объекта
     virtual void move(GLfloat x, GLfloat y) = 0;
@@ -52,13 +45,8 @@ public:
     // Проверка поглощения объекта
     int capture(Circle& circle);
     
-    // Изменить направление скорости, если радиус circle больше, чем у this
-    void changeDirection(Circle& circle) {
-        if (circle.getRadius()>radius) { // Убегает, если больше
-            if ((x-circle.getX()<0 && speedX>0) || (x-circle.getX()>0 && speedX<0)) speedX*=-1;
-            if ((y-circle.getY()<0 && speedY>0) || (y-circle.getY()>0 && speedY<0)) speedY*=-1;
-        }
-    }
+    // Изменить направление скорости
+    void changeDirection(Circle& circle);
     
     // Расстояние до другого объекта
     const GLfloat getDistance(Circle& circle) {
@@ -99,16 +87,6 @@ public:
     const GLfloat getX() {return x;}
     const GLfloat getY() {return y;}
     
-    
-    
-protected:
-    GLfloat x;                         
-    GLfloat y;
-    GLfloat radius;                 /* радиус объекта */
-    GLfloat color[COUNT_OF_COLORS]; /* цвет объекта */
-    GLfloat speedX=0.0;             /* проекция скорости объекта на ось X */
-    GLfloat speedY=0.0;             /* проекция скорости объекта на ось Y */
-    
 };
 
 class CircleRival: public Circle  {
@@ -123,11 +101,13 @@ public:
     
     // Перемещение объекта
     void motion();
-    
-    
 };
 
 class CircleUser: public Circle {
+protected:
+    const GLfloat massIndex=50.0;  /* коэффициент для получения массы при помощи радиуса */
+    GLfloat deceleration=0.0;       /* коэффициент замедления */
+    
 public:
     CircleUser (GLfloat x, GLfloat y, GLfloat radius): Circle (x, y, radius) {};
     
@@ -136,9 +116,6 @@ public:
     
     // Перемещение объекта
     void motion();
-protected:
-    const GLfloat massIndex=50;  /* коэффициент для получения массы при помощи радиуса */
-    GLfloat deceleration=0.0;       /* коэффициент замедления */
 };
 
 
