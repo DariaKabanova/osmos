@@ -181,13 +181,18 @@ void idle(void) {
 
 void mouseClick(int button, int state, int x, int y) {
     if (!state) {
-        //field->mouseClick(x, WINDOW_HEIGHT-y);
         stateClick=true;
         mouse_x=x;
-        mouse_y=y;
-        
+        mouse_y=y;        
     }
     else stateClick=false;
+}
+
+void mouseMotion(int x, int y) {
+    if (stateClick) {
+        mouse_x=x;
+        mouse_y=y;
+    }
 }
 
 // Функция перерисовки при изменении размеров окна
@@ -234,6 +239,8 @@ int main(int argc, char** argv)
     
     // Установка функции изменения размеров окна
     glutReshapeFunc(reshape);
+    
+    glutMotionFunc(mouseMotion);
     
     glutMouseFunc(mouseClick);
     
