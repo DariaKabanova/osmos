@@ -25,6 +25,10 @@ Field::Field(int countOfRivals, GLfloat *userColor, GLfloat *minColor, GLfloat *
     startNewGame();
 }
 
+Field::~Field() {
+    circles.clear();
+}
+
 // Начало новой игры
 void Field::startNewGame() {
     

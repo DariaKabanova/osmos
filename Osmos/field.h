@@ -18,14 +18,17 @@
 
 
 class Field {
-private:
-    std::vector<std::shared_ptr<Circle>> circles;
+protected:
+    GLfloat maxColor[COUNT_OF_COLORS];              /* цвет самого большого объекта */
+    GLfloat minColor[COUNT_OF_COLORS];              /* цвет самого маленького объекта */
+    GLfloat userColor[COUNT_OF_COLORS];             /* цвет пользовательского объекта */
+    GLfloat midColor[COUNT_OF_COLORS];              /* цвет объекта, равного по размеру пользовательскому */
+    int countOfRivals;                              /* количество противников */
+    std::vector<std::shared_ptr<Circle>> circles;   /* контейнер с объектами */
     
 public:
     Field(int countOfRivals,GLfloat *userColor, GLfloat *minColor, GLfloat *maxColor);
-    ~Field() {
-        circles.clear();
-    }
+    ~Field();
     // Перерисока объектов
     void draw();
     
@@ -37,14 +40,6 @@ public:
     
     // Начать новую игру
     void startNewGame();
- 
-protected:
-    GLfloat maxColor[COUNT_OF_COLORS];  /* цвет самого большого объекта */
-    GLfloat minColor[COUNT_OF_COLORS];  /* цвет самого маленького объекта */
-    GLfloat userColor[COUNT_OF_COLORS]; /* цвет пользовательского объекта */
-    GLfloat midColor[COUNT_OF_COLORS];  /* цвет объекта, равного по размеру пользовательскому */
-    int countOfRivals;                  /* количество противников */
-    
 };
 
 
