@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F051C8E17687ADA00CA6769 /* field.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2F051C8C17687ADA00CA6769 /* field.cpp */; };
+		2F0C78951778E0D10002EBA4 /* config.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2F147B89176EEFA400177729 /* config.json */; };
 		2F4ABA62176764A500EC6CB0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2F4ABA61176764A500EC6CB0 /* main.cpp */; };
 		2F4ABA64176764A500EC6CB0 /* Osmos.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2F4ABA63176764A500EC6CB0 /* Osmos.1 */; };
 		2F4ABA6B17677FEE00EC6CB0 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F4ABA6A17677FEE00EC6CB0 /* GLUT.framework */; };
@@ -23,6 +24,7 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
+				2F0C78951778E0D10002EBA4 /* config.json in CopyFiles */,
 				2F4ABA64176764A500EC6CB0 /* Osmos.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
@@ -32,9 +34,9 @@
 /* Begin PBXFileReference section */
 		2F051C8C17687ADA00CA6769 /* field.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = field.cpp; sourceTree = "<group>"; };
 		2F051C8D17687ADA00CA6769 /* field.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = field.h; sourceTree = "<group>"; };
-		2F147B89176EEFA400177729 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
+		2F147B89176EEFA400177729 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = config.json; path = "/Users/madmoron/Library/Developer/Xcode/DerivedData/Osmos-dghjqprwdkvmjnfyoelymcznvpvp/Build/Products/Debug/../../../../../../../../Desktop/Osmos/Osmos/config.json"; sourceTree = "<absolute>"; };
 		2F4ABA5E176764A500EC6CB0 /* Osmos */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Osmos; sourceTree = BUILT_PRODUCTS_DIR; };
-		2F4ABA61176764A500EC6CB0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		2F4ABA61176764A500EC6CB0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; wrapsLines = 0; };
 		2F4ABA63176764A500EC6CB0 /* Osmos.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Osmos.1; sourceTree = "<group>"; };
 		2F4ABA6A17677FEE00EC6CB0 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		2F4ABA6E17679CDE00EC6CB0 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
