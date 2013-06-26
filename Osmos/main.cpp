@@ -21,11 +21,15 @@
 
 const char *filename = "/users/madmoron/Desktop/config.json";// расположение конфига
 
-std::shared_ptr<Field> field;
-int result=0;
-bool stateClick=false;
-int mouse_x=0;
-int mouse_y=0;
+namespace cfg=the_classes_for_a_game;
+
+namespace {
+    std::shared_ptr<cfg::Field> field;
+    int result=0;
+    bool stateClick=false;
+    int mouse_x=0;
+    int mouse_y=0;
+}
 
 GLubyte space[]=        {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
 
@@ -110,7 +114,7 @@ void init(void)
 
     int countOfEnemies=(int)json_object_get_number(objectEnemy, "count");
     
-    field=std::make_shared<Field> (countOfEnemies,userColor,enemyMinColor,enemyMaxColor);
+    field=std::make_shared<cfg::Field> (countOfEnemies,userColor,enemyMinColor,enemyMaxColor);
 
 }
 // Напечатать надпись
