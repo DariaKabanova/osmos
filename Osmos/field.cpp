@@ -33,12 +33,14 @@ namespace the_classes_for_a_game {
     // Начало новой игры
     void Field::startNewGame() {
         
+        using std::make_shared;
+        
         this->circles.clear();
         
         GLfloat radius=sqrtf(WINDOW_WIDTH*WINDOW_HEIGHT/countOfRivals/20); //5% пространства занято объектами
         
         // Создать игрока
-        this->circles.push_back(std::make_shared<CircleUser> (WINDOW_WIDTH/2,WINDOW_HEIGHT/2,radius));
+        this->circles.push_back(make_shared<CircleUser> (WINDOW_WIDTH/2,WINDOW_HEIGHT/2,radius));
         this->circles.back()->setColor(userColor);
         
         // Посчитать распределение соперников, чтобы они не перекрывали друг друга
@@ -60,7 +62,7 @@ namespace the_classes_for_a_game {
             }
             
             // Записать в вектор соперников
-            this->circles.push_back(std::make_shared<CircleRival> (x,y,radius));
+            this->circles.push_back(make_shared<CircleRival> (x,y,radius));
             this->circles.back()->setColor(midColor);
             
             // Установить скорость
@@ -74,7 +76,8 @@ namespace the_classes_for_a_game {
     // Перерисовка объектов
     void Field::draw() {
         for (auto i: circles)
-            i->draw();        
+            i->draw();
+        
     }
 
     // Перемещение объектов и проверка поглощений
