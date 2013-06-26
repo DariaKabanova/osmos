@@ -9,16 +9,15 @@
 #ifndef __Osmos___ircle__
 #define __Osmos___ircle__
 
-#define COUNT_OF_COLORS 3
-#define WINDOW_WIDTH    512
-#define WINDOW_HEIGHT   512
-
 #include <iostream>
-#include <algorithm>
 #include <math.h>
 #include <OpenGL/OpenGL.h>
 
 namespace  the_classes_for_a_game {
+    
+    const int COUNT_OF_COLORS=3;
+    const int WINDOW_WIDTH=512;
+    const int WINDOW_HEIGHT=512;    
 
     class Circle {
     protected:

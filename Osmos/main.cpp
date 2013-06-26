@@ -138,7 +138,7 @@ void display()
     // Вывод сообщений о конце игры
     if (result) {
         glColor3f(1.0, 1.0, 1.0);
-        glRasterPos2i(WINDOW_WIDTH/2-70,WINDOW_HEIGHT/2);
+        glRasterPos2i(cfg::WINDOW_WIDTH/2-70,cfg::WINDOW_HEIGHT/2);
         if (result==1)
             printString("YOU ARE A WINNER");
         if (result==2)      
@@ -177,7 +177,7 @@ bool calculateWatch() {
 void idle(void) {
     
     if (calculateWatch() && !result) {
-        if (stateClick) field->mouseClick(mouse_x, WINDOW_HEIGHT-mouse_y);
+        if (stateClick) field->mouseClick(mouse_x, cfg::WINDOW_HEIGHT-mouse_y);
         result=field->move();
         glutPostRedisplay(); //запуск функции display
     }
@@ -227,7 +227,7 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     
     // Установка начального состояния окна
-    glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+    glutInitWindowSize(cfg::WINDOW_WIDTH, cfg::WINDOW_HEIGHT);
      
     // Установка режима состояния экрана RGBA
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
