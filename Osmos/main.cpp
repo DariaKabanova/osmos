@@ -24,7 +24,7 @@ const char *filename = "/users/madmoron/Desktop/config.json";// располож
 namespace cfg=the_classes_for_a_game;
 
 namespace {
-    std::shared_ptr<cfg::Field> field;
+    std::unique_ptr<cfg::Field> field;
     int result=0;
     bool stateClick=false;
     int mouse_x=0;
@@ -114,7 +114,8 @@ void init(void)
 
     int countOfEnemies=(int)json_object_get_number(objectEnemy, "count");
     
-    field=std::make_shared<cfg::Field> (countOfEnemies,userColor,enemyMinColor,enemyMaxColor);
+    field=std::unique_ptr<cfg::Field> (new cfg::Field (countOfEnemies,userColor,enemyMinColor,enemyMaxColor));
+    //std::make_shared<cfg::Field> (countOfEnemies,userColor,enemyMinColor,enemyMaxColor);
 
 }
 // Напечатать надпись
